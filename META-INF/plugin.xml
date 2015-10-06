@@ -20,6 +20,8 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <fileTypeFactory implementation="claims.bold.intellij.avro.idl.AvroIdlFileTypeFactory" />
+        <lang.parserDefinition language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlParserDefinition" />
+        <lang.syntaxHighlighterFactory key="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlSyntaxHighlighterFactory" />
     </extensions>
 
     <application-components>

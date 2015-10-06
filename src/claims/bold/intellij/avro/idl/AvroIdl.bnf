@@ -1,0 +1,75 @@
+{
+    parserClass = "claims.bold.intellij.avro.idl.parser.AvroIdlParser"
+    extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix = "AvroIdl"
+    psiImplClassSuffix = "Impl"
+    psiPackage = "claims.bold.intellij.avro.idl.psi"
+    psiImplPackage = "claims.bold.intellij.avro.idl.psi.impl"
+
+    elementTypeHolderClass = "claims.bold.intellij.avro.idl.psi.AvroIdlTypes"
+    elementTypeClass = "claims.bold.intellij.avro.idl.psi.AvroIdlElementType"
+    tokenTypeClass = "claims.bold.intellij.avro.idl.psi.AvroIdlTokenType"
+
+    tokens=[
+        LEFT_BRACE='{'
+        RIGHT_BRACE='}'
+        LEFT_PAREN='('
+        RIGHT_PAREN=')'
+        LEFT_BRACKET='['
+        RIGHT_BRACKET=']'
+        LEFT_ANGLE='<'
+        RIGHT_ANGLE='>'
+        AT='@'
+        COMMA=','
+        SEMICOLON=';'
+        EQUALS='='
+
+        LINE_COMMENT="regexp://.*"
+        BLOCK_COMMENT="regexp:/\*(.|\n)*\*/"
+        IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][:jletterdigit:]*"
+        STRING_LITERAL="regexp:\"([^\"\\]|\\.)\""
+        INT_LITERAL="regexp:-?(0|[1-9][:digit:]+)"
+        FLOAT_LITERAL="regexp:{INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?"
+    ]
+
+    generateTokens=true
+}
+
+file ::= protocol_def*
+
+protocol_def ::= annotation? 'protocol' IDENTIFIER '{' declaration* '}' { pin = 2 }
+
+annotation ::= '@' annotation_name '(' annotation_body ')' { pin = 1 }
+private annotation_name ::= 'namespace' | 'order' | 'aliases'
+private annotation_body ::= STRING_LITERAL | annotation_array
+private annotation_array ::= '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']' { pin = 1 }
+
+declaration ::= annotation? (import_decl | record_decl | enum_decl | fixed_decl | message_decl)
+
+import_decl ::= 'import' import_type STRING_LITERAL ';' { pin = 1 }
+import_type ::= 'idl' | 'protocol' | 'schema'
+
+record_decl ::= record_type IDENTIFIER '{' (declarator ';')* '}' { pin = 1 }
+record_type ::= 'record' | 'error'
+
+enum_decl ::= 'enum' IDENTIFIER '{' enum_contents '}' { pin = 1 }
+private enum_contents ::= [ IDENTIFIER (',' IDENTIFIER)* ]
+
+fixed_decl ::= 'fixed' IDENTIFIER '(' expression ')' ';' { pin = 1 }
+
+message_decl ::= type IDENTIFIER '(' arguments ')' message_attributes* ';' { pin = 3 }
+private message_attributes ::= 'throws' IDENTIFIER | 'oneway' { pin = 1}
+private arguments ::= [ declarator (',' declarator)* ]
+
+declarator ::= type annotation? IDENTIFIER [ '=' expression ] { pin = 1 }
+
+type ::= annotation? ( array_type | map_type | union_type | primitive_type )
+primitive_type ::= 'int' | 'long' | 'string' | 'boolean' | 'float' | 'double' | 'null' | 'bytes' | IDENTIFIER
+array_type ::= 'array' '<' type '>' { pin = 1 }
+map_type ::= 'map' '<' type '>' { pin = 1 }
+union_type ::= 'union' '{' union_contents '}' { pin = 1 }
+private union_contents ::= [ type (',' type)* ]
+
+// TODO 
+expression ::= STRING_LITERAL | INT_LITERAL | FLOAT_LITERAL | 'true' | 'false' | 'null'
