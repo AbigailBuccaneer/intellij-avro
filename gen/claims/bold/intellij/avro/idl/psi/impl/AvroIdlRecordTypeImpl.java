@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlRecordTypeImpl extends ASTWrapperPsiElement implements AvroIdlRecordType {
+public class AvroIdlRecordTypeImpl extends AvroIdlTypeImpl implements AvroIdlRecordType {
 
   public AvroIdlRecordTypeImpl(ASTNode node) {
     super(node);

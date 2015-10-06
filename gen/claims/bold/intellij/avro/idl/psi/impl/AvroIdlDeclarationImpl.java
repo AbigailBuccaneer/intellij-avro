@@ -22,40 +22,4 @@ public class AvroIdlDeclarationImpl extends ASTWrapperPsiElement implements Avro
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlEnumDecl getEnumDecl() {
-    return findChildByClass(AvroIdlEnumDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlFixedDecl getFixedDecl() {
-    return findChildByClass(AvroIdlFixedDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlImportDecl getImportDecl() {
-    return findChildByClass(AvroIdlImportDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlMessageDecl getMessageDecl() {
-    return findChildByClass(AvroIdlMessageDecl.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlRecordDecl getRecordDecl() {
-    return findChildByClass(AvroIdlRecordDecl.class);
-  }
-
 }

@@ -12,7 +12,7 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitArrayType(@NotNull AvroIdlArrayType o) {
-    visitPsiElement(o);
+    visitType(o);
   }
 
   public void visitDeclaration(@NotNull AvroIdlDeclaration o) {
@@ -24,7 +24,7 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitEnumDecl(@NotNull AvroIdlEnumDecl o) {
-    visitPsiElement(o);
+    visitDeclaration(o);
   }
 
   public void visitExpression(@NotNull AvroIdlExpression o) {
@@ -32,27 +32,27 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitFixedDecl(@NotNull AvroIdlFixedDecl o) {
-    visitPsiElement(o);
+    visitDeclaration(o);
   }
 
   public void visitImportDecl(@NotNull AvroIdlImportDecl o) {
-    visitPsiElement(o);
+    visitDeclaration(o);
   }
 
   public void visitImportType(@NotNull AvroIdlImportType o) {
-    visitPsiElement(o);
+    visitType(o);
   }
 
   public void visitMapType(@NotNull AvroIdlMapType o) {
-    visitPsiElement(o);
+    visitType(o);
   }
 
   public void visitMessageDecl(@NotNull AvroIdlMessageDecl o) {
-    visitPsiElement(o);
+    visitDeclaration(o);
   }
 
   public void visitPrimitiveType(@NotNull AvroIdlPrimitiveType o) {
-    visitPsiElement(o);
+    visitType(o);
   }
 
   public void visitProtocolDef(@NotNull AvroIdlProtocolDef o) {
@@ -60,11 +60,11 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitRecordDecl(@NotNull AvroIdlRecordDecl o) {
-    visitPsiElement(o);
+    visitDeclaration(o);
   }
 
   public void visitRecordType(@NotNull AvroIdlRecordType o) {
-    visitPsiElement(o);
+    visitType(o);
   }
 
   public void visitType(@NotNull AvroIdlType o) {
@@ -72,7 +72,7 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitUnionType(@NotNull AvroIdlUnionType o) {
-    visitPsiElement(o);
+    visitType(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

@@ -5,7 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface AvroIdlPrimitiveType extends PsiElement {
+public interface AvroIdlPrimitiveType extends AvroIdlType {
+
+  @Nullable
+  AvroIdlAnnotation getAnnotation();
 
   @Nullable
   PsiElement getIdentifier();

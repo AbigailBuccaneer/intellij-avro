@@ -22,34 +22,4 @@ public class AvroIdlTypeImpl extends ASTWrapperPsiElement implements AvroIdlType
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlArrayType getArrayType() {
-    return findChildByClass(AvroIdlArrayType.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlMapType getMapType() {
-    return findChildByClass(AvroIdlMapType.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlPrimitiveType getPrimitiveType() {
-    return findChildByClass(AvroIdlPrimitiveType.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlUnionType getUnionType() {
-    return findChildByClass(AvroIdlUnionType.class);
-  }
-
 }

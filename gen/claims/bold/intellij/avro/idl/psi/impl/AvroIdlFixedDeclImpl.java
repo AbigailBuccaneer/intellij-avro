@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlFixedDeclImpl extends ASTWrapperPsiElement implements AvroIdlFixedDecl {
+public class AvroIdlFixedDeclImpl extends AvroIdlDeclarationImpl implements AvroIdlFixedDecl {
 
   public AvroIdlFixedDeclImpl(ASTNode node) {
     super(node);
@@ -20,6 +19,12 @@ public class AvroIdlFixedDeclImpl extends ASTWrapperPsiElement implements AvroId
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitFixedDecl(this);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public AvroIdlAnnotation getAnnotation() {
+    return findChildByClass(AvroIdlAnnotation.class);
   }
 
   @Override

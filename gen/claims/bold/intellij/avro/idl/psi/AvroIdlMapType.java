@@ -5,7 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface AvroIdlMapType extends PsiElement {
+public interface AvroIdlMapType extends AvroIdlType {
+
+  @Nullable
+  AvroIdlAnnotation getAnnotation();
 
   @Nullable
   AvroIdlType getType();

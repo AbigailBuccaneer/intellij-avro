@@ -61,6 +61,10 @@
     ]
 
     generateTokens=true
+
+    extends(".*_decl") = declaration
+    extends(".*_type") = type
+
 }
 
 file ::= protocol_def*
@@ -72,30 +76,30 @@ private annotation_name ::= 'namespace' | 'order' | 'aliases'
 private annotation_body ::= STRING_LITERAL | annotation_array
 private annotation_array ::= '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']' { pin = 1 }
 
-declaration ::= annotation? (import_decl | record_decl | enum_decl | fixed_decl | message_decl)
+declaration ::= import_decl | record_decl | enum_decl | fixed_decl | message_decl
 
-import_decl ::= 'import' import_type STRING_LITERAL ';' { pin = 1 }
+import_decl ::= annotation? 'import' import_type STRING_LITERAL ';' { pin = 2 }
 import_type ::= 'idl' | 'protocol' | 'schema'
-
-record_decl ::= record_type IDENTIFIER '{' (declarator ';')* '}' { pin = 1 }
+record_decl ::= annotation? record_type IDENTIFIER '{' (declarator ';')* '}' { pin = 2 }
 record_type ::= 'record' | 'error'
 
-enum_decl ::= 'enum' IDENTIFIER '{' enum_contents '}' { pin = 1 }
+enum_decl ::= annotation? 'enum' IDENTIFIER '{' enum_contents '}' { pin = 2 }
 private enum_contents ::= [ IDENTIFIER (',' IDENTIFIER)* ]
 
-fixed_decl ::= 'fixed' IDENTIFIER '(' expression ')' ';' { pin = 1 }
+fixed_decl ::= annotation? 'fixed' IDENTIFIER '(' expression ')' ';' { pin = 2 }
 
-message_decl ::= type IDENTIFIER '(' arguments ')' message_attributes* ';' { pin = 3 }
+message_decl ::= annotation? type IDENTIFIER '(' arguments ')' message_attributes* ';' { pin = 4 }
 private message_attributes ::= 'throws' IDENTIFIER | 'oneway' { pin = 1}
 private arguments ::= [ declarator (',' declarator)* ]
 
 declarator ::= type annotation? IDENTIFIER [ '=' expression ] { pin = 1 }
 
-type ::= annotation? ( array_type | map_type | union_type | primitive_type )
-primitive_type ::= 'int' | 'long' | 'string' | 'boolean' | 'float' | 'double' | 'null' | 'bytes' | IDENTIFIER
-array_type ::= 'array' '<' type '>' { pin = 1 }
-map_type ::= 'map' '<' type '>' { pin = 1 }
-union_type ::= 'union' '{' union_contents '}' { pin = 1 }
+type ::= array_type | map_type | union_type | primitive_type
+primitive_type ::= annotation? ('int' | 'long' | 'string' | 'boolean' | 'float' | 'double' | 'null' | 'bytes' | IDENTIFIER)
+private angle_type ::= '<' type '>' { pin = 1 }
+array_type ::= annotation? 'array' angle_type { pin = 2 }
+map_type ::= annotation? 'map' angle_type { pin = 2 }
+union_type ::= annotation? 'union' '{' union_contents '}' { pin = 2 }
 private union_contents ::= [ type (',' type)* ]
 
 // TODO 

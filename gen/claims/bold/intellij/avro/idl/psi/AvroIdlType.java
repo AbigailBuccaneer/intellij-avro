@@ -7,19 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface AvroIdlType extends PsiElement {
 
-  @Nullable
-  AvroIdlAnnotation getAnnotation();
-
-  @Nullable
-  AvroIdlArrayType getArrayType();
-
-  @Nullable
-  AvroIdlMapType getMapType();
-
-  @Nullable
-  AvroIdlPrimitiveType getPrimitiveType();
-
-  @Nullable
-  AvroIdlUnionType getUnionType();
-
 }
