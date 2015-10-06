@@ -1,4 +1,4 @@
-package claims.bold.intellij.avro.idl;
+package claims.bold.intellij.avro.idl.lexer;
 import com.intellij.lexer.*;
 import com.intellij.psi.tree.IElementType;
 import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
@@ -24,7 +24,7 @@ WHITE_SPACE=({LINE_WS}|{EOL})+
 LINE_COMMENT="//" .*
 BLOCK_COMMENT="/*" !([^]* "*/" [^]*) ("*/")?
 
-IDENTIFIER=(`[^`]*`)|[:jletter:][:jletterdigit:]*
+IDENTIFIER=(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*
 
 CHAR=[^\r\n\'\"\\]
 HEX=[[:digit:]A-f]

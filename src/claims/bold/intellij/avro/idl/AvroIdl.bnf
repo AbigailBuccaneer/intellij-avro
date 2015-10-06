@@ -54,7 +54,7 @@
 
         LINE_COMMENT="regexp://.*"
         BLOCK_COMMENT="regexp:/\*(.|\n)*\*/"
-        IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][:jletterdigit:]*"
+        IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*"
         STRING_LITERAL="regexp:\"([^\"\\]|\\.)\""
         INT_LITERAL="regexp:-?(0|[1-9][:digit:]+)"
         FLOAT_LITERAL="regexp:{INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?"
