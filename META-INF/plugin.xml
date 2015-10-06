@@ -1,0 +1,33 @@
+<idea-plugin version="2">
+    <id>claims.bold.intellij.avro</id>
+    <name>Apache Avro™ support</name>
+    <version>0.1.0</version>
+    <vendor email="abigail@bold.claims" url="https://github.com/AbigailBuccaneer/intellij-avro">Abigail</vendor>
+
+    <description><![CDATA[
+    A plugin adding support for Apache Avro™.
+    ]]></description>
+
+
+    <change-notes><![CDATA[
+    <ul>
+        <li>0.1.0: Initial release</li>
+    </ul>
+    ]]></change-notes>
+
+    <idea-version since-build="131"/>
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <application-components>
+    </application-components>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+    </actions>
+
+</idea-plugin>
