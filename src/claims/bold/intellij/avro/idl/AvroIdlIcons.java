@@ -1,7 +1,6 @@
 package claims.bold.intellij.avro.idl;
 
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.util.IconLoader;
 
 import javax.swing.*;
 

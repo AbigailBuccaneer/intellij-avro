@@ -2,7 +2,6 @@ package claims.bold.intellij.avro.idl;
 
 import claims.bold.intellij.avro.idl.parser.AvroIdlParser;
 import claims.bold.intellij.avro.idl.psi.AvroIdlFile;
-import claims.bold.intellij.avro.idl.psi.AvroIdlTokenType;
 import claims.bold.intellij.avro.idl.psi.AvroIdlTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -13,7 +12,6 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
