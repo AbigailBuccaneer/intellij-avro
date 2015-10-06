@@ -1,5 +1,6 @@
 package claims.bold.intellij.avro.idl;
 
+import claims.bold.intellij.avro.idl.lexer.AvroIdlLexer;
 import claims.bold.intellij.avro.idl.parser.AvroIdlParser;
 import claims.bold.intellij.avro.idl.psi.AvroIdlFile;
 import claims.bold.intellij.avro.idl.psi.AvroIdlTypes;

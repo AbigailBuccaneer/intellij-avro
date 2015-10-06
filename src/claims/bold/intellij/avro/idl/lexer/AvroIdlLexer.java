@@ -1,4 +1,4 @@
-package claims.bold.intellij.avro.idl;
+package claims.bold.intellij.avro.idl.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 

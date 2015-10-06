@@ -1,5 +1,6 @@
-package claims.bold.intellij.avro.idl;
+package claims.bold.intellij.avro.idl.colors;
 
+import claims.bold.intellij.avro.idl.AvroIdlIcons;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;

@@ -1,4 +1,4 @@
-package claims.bold.intellij.avro.idl;
+package claims.bold.intellij.avro.idl.colors;
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;

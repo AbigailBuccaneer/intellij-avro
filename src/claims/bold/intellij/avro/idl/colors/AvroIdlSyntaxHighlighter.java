@@ -1,5 +1,6 @@
-package claims.bold.intellij.avro.idl;
+package claims.bold.intellij.avro.idl.colors;
 
+import claims.bold.intellij.avro.idl.lexer.AvroIdlLexer;
 import claims.bold.intellij.avro.idl.psi.AvroIdlTypes;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import static claims.bold.intellij.avro.idl.AvroIdlSyntaxColors.*;
+import static claims.bold.intellij.avro.idl.colors.AvroIdlSyntaxColors.*;
 
 /**
  * Created by abigail on 06/10/15.
