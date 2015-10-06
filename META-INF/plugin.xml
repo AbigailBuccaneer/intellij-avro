@@ -25,6 +25,7 @@
         <colorSettingsPage implementation="claims.bold.intellij.avro.idl.colors.AvroIdlColorSettingsPage" />
         <annotator language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.annotations.AnnotationAnnotator" />
         <problemFileHighlightFilter implementation="claims.bold.intellij.avro.idl.AvroIdlProblemFileHighlightFilter" />
+        <lang.braceMatcher language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlPairedBraceMatcher" />
     </extensions>
 
     <application-components>
