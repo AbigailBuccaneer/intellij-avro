@@ -23,6 +23,7 @@
         <lang.parserDefinition language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlParserDefinition" />
         <lang.syntaxHighlighterFactory key="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.colors.AvroIdlSyntaxHighlighterFactory" />
         <colorSettingsPage implementation="claims.bold.intellij.avro.idl.colors.AvroIdlColorSettingsPage" />
+        <annotator language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.annotations.AnnotationAnnotator" />
     </extensions>
 
     <application-components>

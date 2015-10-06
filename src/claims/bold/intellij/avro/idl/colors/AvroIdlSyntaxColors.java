@@ -26,6 +26,7 @@ public interface AvroIdlSyntaxColors {
 
     TextAttributesKey KEYWORD = createTextAttributesKey("AVROIDL_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
     TextAttributesKey TYPE = createTextAttributesKey("AVROIDL_TYPE", DefaultLanguageHighlighterColors.KEYWORD);
+    TextAttributesKey ANNOTATION = createTextAttributesKey("AVROIDL_ANNOTATION", CodeInsightColors.ANNOTATION_NAME_ATTRIBUTES);
 
     TextAttributesKey[] BLOCK_COMMENT_KEYS = new TextAttributesKey[] { BLOCK_COMMENT };
     TextAttributesKey[] LINE_COMMENT_KEYS = new TextAttributesKey[] { LINE_COMMENT };
@@ -54,6 +55,7 @@ public interface AvroIdlSyntaxColors {
         new AttributesDescriptor("Comma", COMMA),
         new AttributesDescriptor("Equals", EQUALS),
         new AttributesDescriptor("Keywords", KEYWORD),
-        new AttributesDescriptor("Types", TYPE)
+        new AttributesDescriptor("Types", TYPE),
+        new AttributesDescriptor("Annotations", ANNOTATION)
     };
 }

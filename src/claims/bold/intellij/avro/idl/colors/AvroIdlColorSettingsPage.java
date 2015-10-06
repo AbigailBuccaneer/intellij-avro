@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -35,10 +36,10 @@ public class AvroIdlColorSettingsPage implements ColorSettingsPage {
         "/**\n" +
         " * An example protocol in Avro IDL\n" +
         " */\n" +
-        "@namespace(\"org.apache.avro.test\")\n" +
+        "<annotation>@namespace(\"org.apache.avro.test\")</annotation>\n" +
         "protocol Simple {\n" +
         "\n" +
-        "    @aliases([\"org.foo.KindOf\"])\n" +
+        "    <annotation>@aliases([\"org.foo.KindOf\"])</annotation>\n" +
         "    enum Kind {\n" +
         "        FOO,\n" +
         "        BAR, // the bar enum value\n" +
@@ -48,15 +49,15 @@ public class AvroIdlColorSettingsPage implements ColorSettingsPage {
         "    fixed MD5(16);\n" +
         "\n" +
         "    record TestRecord {\n" +
-        "        @order(\"ignore\")\n" +
+        "        <annotation>@order(\"ignore\")</annotation>\n" +
         "        string name;\n" +
         "\n" +
-        "        @order(\"descending\")\n" +
+        "        <annotation>@order(\"descending\")</annotation>\n" +
         "        Kind kind;\n" +
         "\n" +
         "        MD5 hash;\n" +
         "\n" +
-        "        union { MD5, null} @aliases([\"hash\"]) nullableHash;\n" +
+        "        union { MD5, null} <annotation>@aliases([\"hash\"])</annotation> nullableHash;\n" +
         "\n" +
         "        array<long> arrayOfLongs;\n" +
         "    }\n" +
@@ -77,7 +78,9 @@ public class AvroIdlColorSettingsPage implements ColorSettingsPage {
     @Nullable
     @Override
     public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-        return null;
+        Map<String, TextAttributesKey> map = new HashMap<>();
+        map.put("annotation", AvroIdlSyntaxColors.ANNOTATION);
+        return map;
     }
 
     @NotNull
