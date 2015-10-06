@@ -50,6 +50,33 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
   ";"                   { return SEMICOLON; }
   "="                   { return EQUALS; }
 
+  "protocol"            { return PROTOCOL; }
+  "namespace"           { return NAMESPACE; }
+  "order"               { return ORDER; }
+  "aliases"             { return ALIASES; }
+  "import"              { return IMPORT; }
+  "idl"                 { return IDL; }
+  "schema"              { return SCHEMA; }
+  "record"              { return RECORD; }
+  "error"               { return ERROR; }
+  "enum"                { return ENUM; }
+  "fixed"               { return FIXED; }
+  "throws"              { return THROWS; }
+  "oneway"              { return ONEWAY; }
+  "int"                 { return INT; }
+  "long"                { return LONG; }
+  "string"              { return STRING; }
+  "boolean"             { return BOOLEAN; }
+  "float"               { return FLOAT; }
+  "double"              { return DOUBLE; }
+  "null"                { return NULL; }
+  "bytes"               { return BYTES; }
+  "array"               { return ARRAY; }
+  "map"                 { return MAP; }
+  "union"               { return UNION; }
+  "true"                { return TRUE; }
+  "false"               { return FALSE; }
+
   {LINE_COMMENT}        { return LINE_COMMENT; }
   {BLOCK_COMMENT}       { return BLOCK_COMMENT; }
   {IDENTIFIER}          { return IDENTIFIER; }

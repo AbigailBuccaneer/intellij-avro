@@ -26,24 +26,50 @@ public interface AvroIdlTypes {
   IElementType TYPE = new AvroIdlElementType("TYPE");
   IElementType UNION_TYPE = new AvroIdlElementType("UNION_TYPE");
 
+  IElementType ALIASES = new AvroIdlTokenType("aliases");
+  IElementType ARRAY = new AvroIdlTokenType("array");
   IElementType AT = new AvroIdlTokenType("@");
   IElementType BLOCK_COMMENT = new AvroIdlTokenType("BLOCK_COMMENT");
+  IElementType BOOLEAN = new AvroIdlTokenType("boolean");
+  IElementType BYTES = new AvroIdlTokenType("bytes");
   IElementType COMMA = new AvroIdlTokenType(",");
+  IElementType DOUBLE = new AvroIdlTokenType("double");
+  IElementType ENUM = new AvroIdlTokenType("enum");
   IElementType EQUALS = new AvroIdlTokenType("=");
+  IElementType ERROR = new AvroIdlTokenType("error");
+  IElementType FALSE = new AvroIdlTokenType("false");
+  IElementType FIXED = new AvroIdlTokenType("fixed");
+  IElementType FLOAT = new AvroIdlTokenType("float");
   IElementType FLOAT_LITERAL = new AvroIdlTokenType("FLOAT_LITERAL");
   IElementType IDENTIFIER = new AvroIdlTokenType("IDENTIFIER");
+  IElementType IDL = new AvroIdlTokenType("idl");
+  IElementType IMPORT = new AvroIdlTokenType("import");
+  IElementType INT = new AvroIdlTokenType("int");
   IElementType INT_LITERAL = new AvroIdlTokenType("INT_LITERAL");
   IElementType LEFT_ANGLE = new AvroIdlTokenType("<");
   IElementType LEFT_BRACE = new AvroIdlTokenType("{");
   IElementType LEFT_BRACKET = new AvroIdlTokenType("[");
   IElementType LEFT_PAREN = new AvroIdlTokenType("(");
   IElementType LINE_COMMENT = new AvroIdlTokenType("LINE_COMMENT");
+  IElementType LONG = new AvroIdlTokenType("long");
+  IElementType MAP = new AvroIdlTokenType("map");
+  IElementType NAMESPACE = new AvroIdlTokenType("namespace");
+  IElementType NULL = new AvroIdlTokenType("null");
+  IElementType ONEWAY = new AvroIdlTokenType("oneway");
+  IElementType ORDER = new AvroIdlTokenType("order");
+  IElementType PROTOCOL = new AvroIdlTokenType("protocol");
+  IElementType RECORD = new AvroIdlTokenType("record");
   IElementType RIGHT_ANGLE = new AvroIdlTokenType(">");
   IElementType RIGHT_BRACE = new AvroIdlTokenType("}");
   IElementType RIGHT_BRACKET = new AvroIdlTokenType("]");
   IElementType RIGHT_PAREN = new AvroIdlTokenType(")");
+  IElementType SCHEMA = new AvroIdlTokenType("schema");
   IElementType SEMICOLON = new AvroIdlTokenType(";");
+  IElementType STRING = new AvroIdlTokenType("string");
   IElementType STRING_LITERAL = new AvroIdlTokenType("STRING_LITERAL");
+  IElementType THROWS = new AvroIdlTokenType("throws");
+  IElementType TRUE = new AvroIdlTokenType("true");
+  IElementType UNION = new AvroIdlTokenType("union");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {

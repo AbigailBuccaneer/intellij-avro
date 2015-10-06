@@ -25,6 +25,33 @@
         SEMICOLON=';'
         EQUALS='='
 
+        PROTOCOL='protocol'
+        NAMESPACE='namespace'
+        ORDER='order'
+        ALIASES='aliases'
+        IMPORT='import'
+        IDL='idl'
+        SCHEMA='schema'
+        RECORD='record'
+        ERROR='error'
+        ENUM='enum'
+        FIXED='fixed'
+        THROWS='throws'
+        ONEWAY='oneway'
+        INT='int'
+        LONG='long'
+        STRING='string'
+        BOOLEAN='boolean'
+        FLOAT='float'
+        DOUBLE='double'
+        NULL='null'
+        BYTES='bytes'
+        ARRAY='array'
+        MAP='map'
+        UNION='union'
+        TRUE='true'
+        FALSE='false'
+
         LINE_COMMENT="regexp://.*"
         BLOCK_COMMENT="regexp:/\*(.|\n)*\*/"
         IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][:jletterdigit:]*"

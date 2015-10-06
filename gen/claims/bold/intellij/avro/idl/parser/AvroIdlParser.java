@@ -176,9 +176,9 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "annotation_name")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, "namespace");
-    if (!r) r = consumeToken(b, "order");
-    if (!r) r = consumeToken(b, "aliases");
+    r = consumeToken(b, NAMESPACE);
+    if (!r) r = consumeToken(b, ORDER);
+    if (!r) r = consumeToken(b, ALIASES);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -229,9 +229,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'array' '<' type '>'
   public static boolean array_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "array_type")) return false;
+    if (!nextTokenIs(b, ARRAY)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<array type>");
-    r = consumeToken(b, "array");
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeToken(b, ARRAY);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LEFT_ANGLE));
     r = p && report_error_(b, type(b, l + 1)) && r;
@@ -359,9 +360,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'enum' IDENTIFIER '{' enum_contents '}'
   public static boolean enum_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_decl")) return false;
+    if (!nextTokenIs(b, ENUM)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<enum decl>");
-    r = consumeToken(b, "enum");
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeToken(b, ENUM);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, IDENTIFIER));
     r = p && report_error_(b, consumeToken(b, LEFT_BRACE)) && r;
@@ -380,9 +382,9 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, STRING_LITERAL);
     if (!r) r = consumeToken(b, INT_LITERAL);
     if (!r) r = consumeToken(b, FLOAT_LITERAL);
-    if (!r) r = consumeToken(b, "true");
-    if (!r) r = consumeToken(b, "false");
-    if (!r) r = consumeToken(b, "null");
+    if (!r) r = consumeToken(b, TRUE);
+    if (!r) r = consumeToken(b, FALSE);
+    if (!r) r = consumeToken(b, NULL);
     exit_section_(b, l, m, EXPRESSION, r, false, null);
     return r;
   }
@@ -404,9 +406,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'fixed' IDENTIFIER '(' expression ')' ';'
   public static boolean fixed_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "fixed_decl")) return false;
+    if (!nextTokenIs(b, FIXED)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<fixed decl>");
-    r = consumeToken(b, "fixed");
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeToken(b, FIXED);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, IDENTIFIER));
     r = p && report_error_(b, consumeToken(b, LEFT_PAREN)) && r;
@@ -421,9 +424,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'import' import_type STRING_LITERAL ';'
   public static boolean import_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "import_decl")) return false;
+    if (!nextTokenIs(b, IMPORT)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<import decl>");
-    r = consumeToken(b, "import");
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeToken(b, IMPORT);
     p = r; // pin = 1
     r = r && report_error_(b, import_type(b, l + 1));
     r = p && report_error_(b, consumeToken(b, STRING_LITERAL)) && r;
@@ -438,9 +442,9 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "import_type")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<import type>");
-    r = consumeToken(b, "idl");
-    if (!r) r = consumeToken(b, "protocol");
-    if (!r) r = consumeToken(b, "schema");
+    r = consumeToken(b, IDL);
+    if (!r) r = consumeToken(b, PROTOCOL);
+    if (!r) r = consumeToken(b, SCHEMA);
     exit_section_(b, l, m, IMPORT_TYPE, r, false, null);
     return r;
   }
@@ -449,9 +453,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'map' '<' type '>'
   public static boolean map_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "map_type")) return false;
+    if (!nextTokenIs(b, MAP)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<map type>");
-    r = consumeToken(b, "map");
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeToken(b, MAP);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LEFT_ANGLE));
     r = p && report_error_(b, type(b, l + 1)) && r;
@@ -464,10 +469,11 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'throws' IDENTIFIER | 'oneway'
   static boolean message_attributes(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "message_attributes")) return false;
+    if (!nextTokenIs(b, "", ONEWAY, THROWS)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = message_attributes_0(b, l + 1);
-    if (!r) r = consumeToken(b, "oneway");
+    if (!r) r = consumeToken(b, ONEWAY);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -477,7 +483,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "message_attributes_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, "throws");
+    r = consumeToken(b, THROWS);
     r = r && consumeToken(b, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
@@ -519,14 +525,14 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "primitive_type")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<primitive type>");
-    r = consumeToken(b, "int");
-    if (!r) r = consumeToken(b, "long");
-    if (!r) r = consumeToken(b, "string");
-    if (!r) r = consumeToken(b, "boolean");
-    if (!r) r = consumeToken(b, "float");
-    if (!r) r = consumeToken(b, "double");
-    if (!r) r = consumeToken(b, "null");
-    if (!r) r = consumeToken(b, "bytes");
+    r = consumeToken(b, INT);
+    if (!r) r = consumeToken(b, LONG);
+    if (!r) r = consumeToken(b, STRING);
+    if (!r) r = consumeToken(b, BOOLEAN);
+    if (!r) r = consumeToken(b, FLOAT);
+    if (!r) r = consumeToken(b, DOUBLE);
+    if (!r) r = consumeToken(b, NULL);
+    if (!r) r = consumeToken(b, BYTES);
     if (!r) r = consumeToken(b, IDENTIFIER);
     exit_section_(b, l, m, PRIMITIVE_TYPE, r, false, null);
     return r;
@@ -536,10 +542,11 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // annotation? 'protocol' IDENTIFIER '{' declaration* '}'
   public static boolean protocol_def(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "protocol_def")) return false;
+    if (!nextTokenIs(b, "<protocol def>", AT, PROTOCOL)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<protocol def>");
     r = protocol_def_0(b, l + 1);
-    r = r && consumeToken(b, "protocol");
+    r = r && consumeToken(b, PROTOCOL);
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, IDENTIFIER));
     r = p && report_error_(b, consumeToken(b, LEFT_BRACE)) && r;
@@ -572,6 +579,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // record_type IDENTIFIER '{' (declarator ';')* '}'
   public static boolean record_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "record_decl")) return false;
+    if (!nextTokenIs(b, "<record decl>", ERROR, RECORD)) return false;
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<record decl>");
     r = record_type(b, l + 1);
@@ -611,10 +619,11 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'record' | 'error'
   public static boolean record_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "record_type")) return false;
+    if (!nextTokenIs(b, "<record type>", ERROR, RECORD)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<record type>");
-    r = consumeToken(b, "record");
-    if (!r) r = consumeToken(b, "error");
+    r = consumeToken(b, RECORD);
+    if (!r) r = consumeToken(b, ERROR);
     exit_section_(b, l, m, RECORD_TYPE, r, false, null);
     return r;
   }
@@ -697,9 +706,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   // 'union' '{' union_contents '}'
   public static boolean union_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "union_type")) return false;
+    if (!nextTokenIs(b, UNION)) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, "<union type>");
-    r = consumeToken(b, "union");
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeToken(b, UNION);
     p = r; // pin = 1
     r = r && report_error_(b, consumeToken(b, LEFT_BRACE));
     r = p && report_error_(b, union_contents(b, l + 1)) && r;
