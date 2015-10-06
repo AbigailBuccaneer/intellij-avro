@@ -19,6 +19,7 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <fileTypeFactory implementation="claims.bold.intellij.avro.idl.AvroIdlFileTypeFactory" />
     </extensions>
 
     <application-components>
