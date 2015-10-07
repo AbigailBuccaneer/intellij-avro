@@ -51,9 +51,6 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
   "="                   { return EQUALS; }
 
   "protocol"            { return PROTOCOL; }
-  "namespace"           { return NAMESPACE; }
-  "order"               { return ORDER; }
-  "aliases"             { return ALIASES; }
   "import"              { return IMPORT; }
   "idl"                 { return IDL; }
   "schema"              { return SCHEMA; }

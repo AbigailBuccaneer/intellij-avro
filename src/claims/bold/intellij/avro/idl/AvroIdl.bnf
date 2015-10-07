@@ -26,9 +26,6 @@
         EQUALS='='
 
         PROTOCOL='protocol'
-        NAMESPACE='namespace'
-        ORDER='order'
-        ALIASES='aliases'
         IMPORT='import'
         IDL='idl'
         SCHEMA='schema'
@@ -71,8 +68,7 @@ file ::= protocol_def*
 
 protocol_def ::= annotation? 'protocol' IDENTIFIER '{' declaration* '}' { pin = 2 }
 
-annotation ::= '@' annotation_name '(' annotation_body ')' { pin = 1 }
-private annotation_name ::= 'namespace' | 'order' | 'aliases'
+annotation ::= '@' IDENTIFIER '(' annotation_body ')' { pin = 1 }
 private annotation_body ::= STRING_LITERAL | annotation_array
 private annotation_array ::= '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']' { pin = 1 }
 

@@ -26,7 +26,6 @@ public interface AvroIdlTypes {
   IElementType TYPE = new AvroIdlElementType("TYPE");
   IElementType UNION_TYPE = new AvroIdlElementType("UNION_TYPE");
 
-  IElementType ALIASES = new AvroIdlTokenType("aliases");
   IElementType ARRAY = new AvroIdlTokenType("array");
   IElementType AT = new AvroIdlTokenType("@");
   IElementType BLOCK_COMMENT = new AvroIdlTokenType("BLOCK_COMMENT");
@@ -53,10 +52,8 @@ public interface AvroIdlTypes {
   IElementType LINE_COMMENT = new AvroIdlTokenType("LINE_COMMENT");
   IElementType LONG = new AvroIdlTokenType("long");
   IElementType MAP = new AvroIdlTokenType("map");
-  IElementType NAMESPACE = new AvroIdlTokenType("namespace");
   IElementType NULL = new AvroIdlTokenType("null");
   IElementType ONEWAY = new AvroIdlTokenType("oneway");
-  IElementType ORDER = new AvroIdlTokenType("order");
   IElementType PROTOCOL = new AvroIdlTokenType("protocol");
   IElementType RECORD = new AvroIdlTokenType("record");
   IElementType RIGHT_ANGLE = new AvroIdlTokenType(">");

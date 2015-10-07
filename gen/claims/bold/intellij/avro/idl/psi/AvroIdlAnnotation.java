@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface AvroIdlAnnotation extends PsiElement {
 
+  @Nullable
+  PsiElement getIdentifier();
+
 }

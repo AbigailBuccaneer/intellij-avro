@@ -107,7 +107,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '@' annotation_name '(' annotation_body ')'
+  // '@' IDENTIFIER '(' annotation_body ')'
   public static boolean annotation(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "annotation")) return false;
     if (!nextTokenIs(b, AT)) return false;
@@ -115,7 +115,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, null);
     r = consumeToken(b, AT);
     p = r; // pin = 1
-    r = r && report_error_(b, annotation_name(b, l + 1));
+    r = r && report_error_(b, consumeToken(b, IDENTIFIER));
     r = p && report_error_(b, consumeToken(b, LEFT_PAREN)) && r;
     r = p && report_error_(b, annotation_body(b, l + 1)) && r;
     r = p && consumeToken(b, RIGHT_PAREN) && r;
@@ -188,19 +188,6 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, STRING_LITERAL);
     if (!r) r = annotation_array(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // 'namespace' | 'order' | 'aliases'
-  static boolean annotation_name(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_name")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, NAMESPACE);
-    if (!r) r = consumeToken(b, ORDER);
-    if (!r) r = consumeToken(b, ALIASES);
     exit_section_(b, m, null, r);
     return r;
   }

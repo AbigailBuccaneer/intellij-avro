@@ -22,4 +22,10 @@ public class AvroIdlAnnotationImpl extends ASTWrapperPsiElement implements AvroI
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getIdentifier() {
+    return findChildByType(IDENTIFIER);
+  }
+
 }
