@@ -30,7 +30,7 @@ CHAR=[^\r\n\'\"\\]
 HEX=[[:digit:]A-f]
 ESC="\\" ( [^] | "u" {HEX}{HEX}{HEX}{HEX} )
 STRING_LITERAL=\" ({CHAR} | {ESC} | \')* \"
-INT_LITERAL=-?(0|[1-9][:digit:]+)
+INT_LITERAL= "-"? (0|([1-9][:digit:]*))
 FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
 
 %%
