@@ -13,10 +13,13 @@ public interface AvroIdlTypes {
   IElementType DECLARATION = new AvroIdlElementType("DECLARATION");
   IElementType DECLARATOR = new AvroIdlElementType("DECLARATOR");
   IElementType ENUM_DECL = new AvroIdlElementType("ENUM_DECL");
-  IElementType EXPRESSION = new AvroIdlElementType("EXPRESSION");
   IElementType FIXED_DECL = new AvroIdlElementType("FIXED_DECL");
   IElementType IMPORT_DECL = new AvroIdlElementType("IMPORT_DECL");
   IElementType IMPORT_TYPE = new AvroIdlElementType("IMPORT_TYPE");
+  IElementType JSON_ARRAY = new AvroIdlElementType("JSON_ARRAY");
+  IElementType JSON_OBJECT = new AvroIdlElementType("JSON_OBJECT");
+  IElementType JSON_OBJECT_ENTRY = new AvroIdlElementType("JSON_OBJECT_ENTRY");
+  IElementType JSON_VALUE = new AvroIdlElementType("JSON_VALUE");
   IElementType MAP_TYPE = new AvroIdlElementType("MAP_TYPE");
   IElementType MESSAGE_DECL = new AvroIdlElementType("MESSAGE_DECL");
   IElementType PRIMITIVE_TYPE = new AvroIdlElementType("PRIMITIVE_TYPE");
@@ -31,6 +34,7 @@ public interface AvroIdlTypes {
   IElementType BLOCK_COMMENT = new AvroIdlTokenType("BLOCK_COMMENT");
   IElementType BOOLEAN = new AvroIdlTokenType("boolean");
   IElementType BYTES = new AvroIdlTokenType("bytes");
+  IElementType COLON = new AvroIdlTokenType(":");
   IElementType COMMA = new AvroIdlTokenType(",");
   IElementType DOUBLE = new AvroIdlTokenType("double");
   IElementType ENUM = new AvroIdlTokenType("enum");
@@ -86,9 +90,6 @@ public interface AvroIdlTypes {
       else if (type == ENUM_DECL) {
         return new AvroIdlEnumDeclImpl(node);
       }
-      else if (type == EXPRESSION) {
-        return new AvroIdlExpressionImpl(node);
-      }
       else if (type == FIXED_DECL) {
         return new AvroIdlFixedDeclImpl(node);
       }
@@ -97,6 +98,18 @@ public interface AvroIdlTypes {
       }
       else if (type == IMPORT_TYPE) {
         return new AvroIdlImportTypeImpl(node);
+      }
+      else if (type == JSON_ARRAY) {
+        return new AvroIdlJsonArrayImpl(node);
+      }
+      else if (type == JSON_OBJECT) {
+        return new AvroIdlJsonObjectImpl(node);
+      }
+      else if (type == JSON_OBJECT_ENTRY) {
+        return new AvroIdlJsonObjectEntryImpl(node);
+      }
+      else if (type == JSON_VALUE) {
+        return new AvroIdlJsonValueImpl(node);
       }
       else if (type == MAP_TYPE) {
         return new AvroIdlMapTypeImpl(node);

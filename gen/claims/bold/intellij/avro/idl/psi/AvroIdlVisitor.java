@@ -27,10 +27,6 @@ public class AvroIdlVisitor extends PsiElementVisitor {
     visitDeclaration(o);
   }
 
-  public void visitExpression(@NotNull AvroIdlExpression o) {
-    visitPsiElement(o);
-  }
-
   public void visitFixedDecl(@NotNull AvroIdlFixedDecl o) {
     visitDeclaration(o);
   }
@@ -41,6 +37,22 @@ public class AvroIdlVisitor extends PsiElementVisitor {
 
   public void visitImportType(@NotNull AvroIdlImportType o) {
     visitType(o);
+  }
+
+  public void visitJsonArray(@NotNull AvroIdlJsonArray o) {
+    visitPsiElement(o);
+  }
+
+  public void visitJsonObject(@NotNull AvroIdlJsonObject o) {
+    visitPsiElement(o);
+  }
+
+  public void visitJsonObjectEntry(@NotNull AvroIdlJsonObjectEntry o) {
+    visitPsiElement(o);
+  }
+
+  public void visitJsonValue(@NotNull AvroIdlJsonValue o) {
+    visitPsiElement(o);
   }
 
   public void visitMapType(@NotNull AvroIdlMapType o) {

@@ -30,8 +30,8 @@ public class AvroIdlDeclaratorImpl extends ASTWrapperPsiElement implements AvroI
 
   @Override
   @Nullable
-  public AvroIdlExpression getExpression() {
-    return findChildByClass(AvroIdlExpression.class);
+  public AvroIdlJsonValue getJsonValue() {
+    return findChildByClass(AvroIdlJsonValue.class);
   }
 
   @Override

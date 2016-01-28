@@ -48,6 +48,7 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
   "@"                   { return AT; }
   ","                   { return COMMA; }
   ";"                   { return SEMICOLON; }
+  ":"                   { return COLON; }
   "="                   { return EQUALS; }
 
   "protocol"            { return PROTOCOL; }

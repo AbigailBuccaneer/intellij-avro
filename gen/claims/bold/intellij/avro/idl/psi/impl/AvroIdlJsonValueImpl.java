@@ -11,15 +11,27 @@ import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlExpressionImpl extends ASTWrapperPsiElement implements AvroIdlExpression {
+public class AvroIdlJsonValueImpl extends ASTWrapperPsiElement implements AvroIdlJsonValue {
 
-  public AvroIdlExpressionImpl(ASTNode node) {
+  public AvroIdlJsonValueImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitExpression(this);
+    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitJsonValue(this);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public AvroIdlJsonArray getJsonArray() {
+    return findChildByClass(AvroIdlJsonArray.class);
+  }
+
+  @Override
+  @Nullable
+  public AvroIdlJsonObject getJsonObject() {
+    return findChildByClass(AvroIdlJsonObject.class);
   }
 
   @Override
