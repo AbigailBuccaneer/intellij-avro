@@ -5,15 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface AvroIdlFixedDecl extends AvroIdlDeclaration {
+public interface AvroIdlJsonObjectEntry extends PsiElement {
 
-  @Nullable
-  AvroIdlAnnotation getAnnotation();
+  @NotNull
+  AvroIdlJsonValue getJsonValue();
 
-  @Nullable
-  PsiElement getIdentifier();
-
-  @Nullable
-  PsiElement getIntLiteral();
+  @NotNull
+  PsiElement getStringLiteral();
 
 }

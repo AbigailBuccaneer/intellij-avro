@@ -11,7 +11,7 @@ public interface AvroIdlDeclarator extends PsiElement {
   AvroIdlAnnotation getAnnotation();
 
   @Nullable
-  AvroIdlExpression getExpression();
+  AvroIdlJsonValue getJsonValue();
 
   @NotNull
   AvroIdlType getType();

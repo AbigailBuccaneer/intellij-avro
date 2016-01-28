@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>claims.bold.intellij.avro</id>
     <name>Apache Avro™ support</name>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <vendor email="abigail@bold.claims" url="https://github.com/AbigailBuccaneer/intellij-avro">Abigail</vendor>
 
     <description><![CDATA[
@@ -11,6 +11,7 @@
 
     <change-notes><![CDATA[
     <ul>
+        <li>0.2.1: Parsing of non-primitive default values</li>
         <li>0.2.0: Full parsing of Avro™ IDL source code</li>
         <li>0.1.0: Initial release</li>
     </ul>

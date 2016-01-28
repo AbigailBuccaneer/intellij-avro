@@ -8,35 +8,24 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlFixedDeclImpl extends AvroIdlDeclarationImpl implements AvroIdlFixedDecl {
+public class AvroIdlJsonArrayImpl extends ASTWrapperPsiElement implements AvroIdlJsonArray {
 
-  public AvroIdlFixedDeclImpl(ASTNode node) {
+  public AvroIdlJsonArrayImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitFixedDecl(this);
+    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitJsonArray(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getIntLiteral() {
-    return findChildByType(INT_LITERAL);
+  @NotNull
+  public List<AvroIdlJsonValue> getJsonValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlJsonValue.class);
   }
 
 }

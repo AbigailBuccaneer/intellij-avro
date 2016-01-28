@@ -38,9 +38,6 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     else if (t == ENUM_DECL) {
       r = enum_decl(b, 0);
     }
-    else if (t == EXPRESSION) {
-      r = expression(b, 0);
-    }
     else if (t == FIXED_DECL) {
       r = fixed_decl(b, 0);
     }
@@ -49,6 +46,18 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     }
     else if (t == IMPORT_TYPE) {
       r = import_type(b, 0);
+    }
+    else if (t == JSON_ARRAY) {
+      r = json_array(b, 0);
+    }
+    else if (t == JSON_OBJECT) {
+      r = json_object(b, 0);
+    }
+    else if (t == JSON_OBJECT_ENTRY) {
+      r = json_object_entry(b, 0);
+    }
+    else if (t == JSON_VALUE) {
+      r = json_value(b, 0);
     }
     else if (t == MAP_TYPE) {
       r = map_type(b, 0);
@@ -272,7 +281,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // type annotation? IDENTIFIER [ '=' expression ]
+  // type annotation? IDENTIFIER [ '=' json_value ]
   public static boolean declarator(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declarator")) return false;
     boolean r, p;
@@ -293,20 +302,20 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // [ '=' expression ]
+  // [ '=' json_value ]
   private static boolean declarator_3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declarator_3")) return false;
     declarator_3_0(b, l + 1);
     return true;
   }
 
-  // '=' expression
+  // '=' json_value
   private static boolean declarator_3_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "declarator_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, EQUALS);
-    r = r && expression(b, l + 1);
+    r = r && json_value(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -379,22 +388,6 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // STRING_LITERAL | INT_LITERAL | FLOAT_LITERAL | 'true' | 'false' | 'null'
-  public static boolean expression(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expression")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<expression>");
-    r = consumeToken(b, STRING_LITERAL);
-    if (!r) r = consumeToken(b, INT_LITERAL);
-    if (!r) r = consumeToken(b, FLOAT_LITERAL);
-    if (!r) r = consumeToken(b, TRUE);
-    if (!r) r = consumeToken(b, FALSE);
-    if (!r) r = consumeToken(b, NULL);
-    exit_section_(b, l, m, EXPRESSION, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
   // protocol_def*
   static boolean file(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "file")) return false;
@@ -408,7 +401,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // annotation? 'fixed' IDENTIFIER '(' expression ')' ';'
+  // annotation? 'fixed' IDENTIFIER '(' INT_LITERAL ')' ';'
   public static boolean fixed_decl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "fixed_decl")) return false;
     if (!nextTokenIs(b, "<fixed decl>", AT, FIXED)) return false;
@@ -419,7 +412,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     p = r; // pin = 2
     r = r && report_error_(b, consumeToken(b, IDENTIFIER));
     r = p && report_error_(b, consumeToken(b, LEFT_PAREN)) && r;
-    r = p && report_error_(b, expression(b, l + 1)) && r;
+    r = p && report_error_(b, consumeToken(b, INT_LITERAL)) && r;
     r = p && report_error_(b, consumeToken(b, RIGHT_PAREN)) && r;
     r = p && consumeToken(b, SEMICOLON) && r;
     exit_section_(b, l, m, FIXED_DECL, r, p, null);
@@ -467,6 +460,148 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, PROTOCOL);
     if (!r) r = consumeToken(b, SCHEMA);
     exit_section_(b, l, m, IMPORT_TYPE, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '[' [ json_value (',' json_value)* ] ']'
+  public static boolean json_array(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_array")) return false;
+    if (!nextTokenIs(b, LEFT_BRACKET)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LEFT_BRACKET);
+    r = r && json_array_1(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACKET);
+    exit_section_(b, m, JSON_ARRAY, r);
+    return r;
+  }
+
+  // [ json_value (',' json_value)* ]
+  private static boolean json_array_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_array_1")) return false;
+    json_array_1_0(b, l + 1);
+    return true;
+  }
+
+  // json_value (',' json_value)*
+  private static boolean json_array_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_array_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = json_value(b, l + 1);
+    r = r && json_array_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' json_value)*
+  private static boolean json_array_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_array_1_0_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!json_array_1_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "json_array_1_0_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // ',' json_value
+  private static boolean json_array_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_array_1_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && json_value(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '{' [ json_object_entry (',' json_object_entry)* ] '}'
+  public static boolean json_object(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_object")) return false;
+    if (!nextTokenIs(b, LEFT_BRACE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, LEFT_BRACE);
+    r = r && json_object_1(b, l + 1);
+    r = r && consumeToken(b, RIGHT_BRACE);
+    exit_section_(b, m, JSON_OBJECT, r);
+    return r;
+  }
+
+  // [ json_object_entry (',' json_object_entry)* ]
+  private static boolean json_object_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_object_1")) return false;
+    json_object_1_0(b, l + 1);
+    return true;
+  }
+
+  // json_object_entry (',' json_object_entry)*
+  private static boolean json_object_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_object_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = json_object_entry(b, l + 1);
+    r = r && json_object_1_0_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' json_object_entry)*
+  private static boolean json_object_1_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_object_1_0_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!json_object_1_0_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "json_object_1_0_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // ',' json_object_entry
+  private static boolean json_object_1_0_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_object_1_0_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && json_object_entry(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // STRING_LITERAL ':' json_value
+  public static boolean json_object_entry(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_object_entry")) return false;
+    if (!nextTokenIs(b, STRING_LITERAL)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRING_LITERAL);
+    r = r && consumeToken(b, COLON);
+    r = r && json_value(b, l + 1);
+    exit_section_(b, m, JSON_OBJECT_ENTRY, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // json_object | json_array | STRING_LITERAL | INT_LITERAL | FLOAT_LITERAL | 'true' | 'false' | 'null'
+  public static boolean json_value(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "json_value")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<json value>");
+    r = json_object(b, l + 1);
+    if (!r) r = json_array(b, l + 1);
+    if (!r) r = consumeToken(b, STRING_LITERAL);
+    if (!r) r = consumeToken(b, INT_LITERAL);
+    if (!r) r = consumeToken(b, FLOAT_LITERAL);
+    if (!r) r = consumeToken(b, TRUE);
+    if (!r) r = consumeToken(b, FALSE);
+    if (!r) r = consumeToken(b, NULL);
+    exit_section_(b, l, m, JSON_VALUE, r, false, null);
     return r;
   }
 

@@ -8,35 +8,30 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlFixedDeclImpl extends AvroIdlDeclarationImpl implements AvroIdlFixedDecl {
+public class AvroIdlJsonObjectEntryImpl extends ASTWrapperPsiElement implements AvroIdlJsonObjectEntry {
 
-  public AvroIdlFixedDeclImpl(ASTNode node) {
+  public AvroIdlJsonObjectEntryImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitFixedDecl(this);
+    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitJsonObjectEntry(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
+  @NotNull
+  public AvroIdlJsonValue getJsonValue() {
+    return findNotNullChildByClass(AvroIdlJsonValue.class);
   }
 
   @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getIntLiteral() {
-    return findChildByType(INT_LITERAL);
+  @NotNull
+  public PsiElement getStringLiteral() {
+    return findNotNullChildByType(STRING_LITERAL);
   }
 
 }

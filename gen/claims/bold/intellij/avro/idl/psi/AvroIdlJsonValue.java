@@ -5,7 +5,13 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface AvroIdlExpression extends PsiElement {
+public interface AvroIdlJsonValue extends PsiElement {
+
+  @Nullable
+  AvroIdlJsonArray getJsonArray();
+
+  @Nullable
+  AvroIdlJsonObject getJsonObject();
 
   @Nullable
   PsiElement getFloatLiteral();

@@ -23,6 +23,7 @@
         AT='@'
         COMMA=','
         SEMICOLON=';'
+        COLON=':'
         EQUALS='='
 
         PROTOCOL='protocol'
@@ -82,13 +83,13 @@ record_type ::= 'record' | 'error'
 enum_decl ::= annotation? 'enum' IDENTIFIER '{' enum_contents '}' { pin = 2 }
 private enum_contents ::= [ IDENTIFIER (',' IDENTIFIER)* ]
 
-fixed_decl ::= annotation? 'fixed' IDENTIFIER '(' expression ')' ';' { pin = 2 }
+fixed_decl ::= annotation? 'fixed' IDENTIFIER '(' INT_LITERAL ')' ';' { pin = 2 }
 
 message_decl ::= annotation? type IDENTIFIER '(' arguments ')' message_attributes* ';' { pin = 4 }
 private message_attributes ::= 'throws' IDENTIFIER | 'oneway' { pin = 1}
 private arguments ::= [ declarator (',' declarator)* ]
 
-declarator ::= type annotation? IDENTIFIER [ '=' expression ] { pin = 1 }
+declarator ::= type annotation? IDENTIFIER [ '=' json_value ] { pin = 1 }
 
 type ::= array_type | map_type | union_type | primitive_type
 primitive_type ::= annotation? ('int' | 'long' | 'string' | 'boolean' | 'float' | 'double' | 'null' | 'bytes' | IDENTIFIER)
@@ -98,5 +99,7 @@ map_type ::= annotation? 'map' angle_type { pin = 2 }
 union_type ::= annotation? 'union' '{' union_contents '}' { pin = 2 }
 private union_contents ::= [ type (',' type)* ]
 
-// TODO 
-expression ::= STRING_LITERAL | INT_LITERAL | FLOAT_LITERAL | 'true' | 'false' | 'null'
+json_value ::= json_object | json_array | STRING_LITERAL | INT_LITERAL | FLOAT_LITERAL | 'true' | 'false' | 'null'
+json_object ::= '{' [ json_object_entry (',' json_object_entry)* ] '}'
+json_object_entry ::= STRING_LITERAL ':' json_value
+json_array ::= '[' [ json_value (',' json_value)* ] ']'
