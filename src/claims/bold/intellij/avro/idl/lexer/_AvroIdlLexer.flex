@@ -21,16 +21,12 @@ import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 EOL="\r"|"\n"|"\r\n"
 LINE_WS=[\ \t\f]
 WHITE_SPACE=({LINE_WS}|{EOL})+
-LINE_COMMENT="//" .*
-BLOCK_COMMENT="/*" !([^]* "*/" [^]*) ("*/")?
 
+LINE_COMMENT="//".*
+BLOCK_COMMENT="/"\*([^*]|\*+[^/*])*\*+"/"
 IDENTIFIER=(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*
-
-CHAR=[^\r\n\'\"\\]
-HEX=[[:digit:]A-f]
-ESC="\\" ( [^] | "u" {HEX}{HEX}{HEX}{HEX} )
-STRING_LITERAL=\" ({CHAR} | {ESC} | \')* \"
-INT_LITERAL= "-"? (0|([1-9][:digit:]*))
+STRING_LITERAL=\"([^\"]|\\\")*\"
+INT_LITERAL=-?(0|[1-9][:digit:]*)
 FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
 
 %%
@@ -50,7 +46,6 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
   ";"                   { return SEMICOLON; }
   ":"                   { return COLON; }
   "="                   { return EQUALS; }
-
   "protocol"            { return PROTOCOL; }
   "import"              { return IMPORT; }
   "idl"                 { return IDL; }
