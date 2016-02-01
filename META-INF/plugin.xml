@@ -30,6 +30,7 @@
         <lang.braceMatcher language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlPairedBraceMatcher" />
         <lang.commenter language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlCommenter" />
         <lang.foldingBuilder language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlFoldingBuilder" />
+        <lang.psiStructureViewFactory language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.structure.AvroIdlStructureViewFactory" />
     </extensions>
 
     <application-components>
