@@ -29,6 +29,7 @@
         <problemFileHighlightFilter implementation="claims.bold.intellij.avro.idl.AvroIdlProblemFileHighlightFilter" />
         <lang.braceMatcher language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlPairedBraceMatcher" />
         <lang.commenter language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlCommenter" />
+        <lang.foldingBuilder language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.AvroIdlFoldingBuilder" />
     </extensions>
 
     <application-components>
