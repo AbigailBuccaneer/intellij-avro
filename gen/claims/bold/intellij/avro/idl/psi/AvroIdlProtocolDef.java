@@ -4,8 +4,9 @@ package claims.bold.intellij.avro.idl.psi;
 import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
 
-public interface AvroIdlProtocolDef extends PsiElement {
+public interface AvroIdlProtocolDef extends PsiNameIdentifierOwner {
 
   @Nullable
   AvroIdlAnnotation getAnnotation();
@@ -15,5 +16,14 @@ public interface AvroIdlProtocolDef extends PsiElement {
 
   @Nullable
   PsiElement getIdentifier();
+
+  @Nullable
+  PsiElement getNameIdentifier();
+
+  @Nullable
+  @NonNls
+  String getName();
+
+  PsiElement setName(String name);
 
 }

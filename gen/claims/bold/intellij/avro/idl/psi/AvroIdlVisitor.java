@@ -4,6 +4,7 @@ package claims.bold.intellij.avro.idl.psi;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
 
 public class AvroIdlVisitor extends PsiElementVisitor {
 
@@ -20,15 +21,21 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitDeclarator(@NotNull AvroIdlDeclarator o) {
-    visitPsiElement(o);
+    visitPsiNameIdentifierOwner(o);
   }
 
   public void visitEnumDecl(@NotNull AvroIdlEnumDecl o) {
     visitDeclaration(o);
+    // visitPsiNameIdentifierOwner(o);
+  }
+
+  public void visitEnumValue(@NotNull AvroIdlEnumValue o) {
+    visitPsiNameIdentifierOwner(o);
   }
 
   public void visitFixedDecl(@NotNull AvroIdlFixedDecl o) {
     visitDeclaration(o);
+    // visitPsiNameIdentifierOwner(o);
   }
 
   public void visitImportDecl(@NotNull AvroIdlImportDecl o) {
@@ -61,6 +68,7 @@ public class AvroIdlVisitor extends PsiElementVisitor {
 
   public void visitMessageDecl(@NotNull AvroIdlMessageDecl o) {
     visitDeclaration(o);
+    // visitPsiNameIdentifierOwner(o);
   }
 
   public void visitPrimitiveType(@NotNull AvroIdlPrimitiveType o) {
@@ -68,11 +76,12 @@ public class AvroIdlVisitor extends PsiElementVisitor {
   }
 
   public void visitProtocolDef(@NotNull AvroIdlProtocolDef o) {
-    visitPsiElement(o);
+    visitPsiNameIdentifierOwner(o);
   }
 
   public void visitRecordDecl(@NotNull AvroIdlRecordDecl o) {
     visitDeclaration(o);
+    // visitPsiNameIdentifierOwner(o);
   }
 
   public void visitRecordType(@NotNull AvroIdlRecordType o) {
@@ -85,6 +94,10 @@ public class AvroIdlVisitor extends PsiElementVisitor {
 
   public void visitUnionType(@NotNull AvroIdlUnionType o) {
     visitType(o);
+  }
+
+  public void visitPsiNameIdentifierOwner(@NotNull PsiNameIdentifierOwner o) {
+    visitElement(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

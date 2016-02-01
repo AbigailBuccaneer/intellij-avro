@@ -39,4 +39,19 @@ public class AvroIdlMessageDeclImpl extends AvroIdlDeclarationImpl implements Av
     return findNotNullChildByClass(AvroIdlType.class);
   }
 
+  @Nullable
+  public PsiElement getNameIdentifier() {
+    return AvroIdlPsiUtil.getNameIdentifier(this);
+  }
+
+  @Nullable
+  @NonNls
+  public String getName() {
+    return AvroIdlPsiUtil.getName(this);
+  }
+
+  public PsiElement setName(String name) {
+    return AvroIdlPsiUtil.setName(this, name);
+  }
+
 }

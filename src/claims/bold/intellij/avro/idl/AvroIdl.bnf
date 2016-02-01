@@ -6,6 +6,7 @@
     psiImplClassSuffix = "Impl"
     psiPackage = "claims.bold.intellij.avro.idl.psi"
     psiImplPackage = "claims.bold.intellij.avro.idl.psi.impl"
+    psiImplUtilClass = "claims.bold.intellij.avro.idl.psi.AvroIdlPsiUtil"
 
     elementTypeHolderClass = "claims.bold.intellij.avro.idl.psi.AvroIdlTypes"
     elementTypeClass = "claims.bold.intellij.avro.idl.psi.AvroIdlElementType"
@@ -62,7 +63,8 @@
 
     extends(".*_decl") = declaration
     extends(".*_type") = type
-
+    implements("protocol_def|enum_decl|fixed_decl|message_decl|declarator|enum_value|record_decl") = "com.intellij.psi.PsiNameIdentifierOwner"
+    methods("protocol_def|enum_decl|fixed_decl|message_decl|declarator|enum_value|record_decl") = [getNameIdentifier getName setName]
 }
 
 file ::= protocol_def*
@@ -81,7 +83,8 @@ record_decl ::= annotation? record_type IDENTIFIER '{' (declarator ';')* '}' { p
 record_type ::= 'record' | 'error'
 
 enum_decl ::= annotation? 'enum' IDENTIFIER '{' enum_contents '}' { pin = 2 }
-private enum_contents ::= [ IDENTIFIER (',' IDENTIFIER)* ]
+private enum_contents ::= [ enum_value (',' enum_value)* ]
+enum_value ::= IDENTIFIER
 
 fixed_decl ::= annotation? 'fixed' IDENTIFIER '(' INT_LITERAL ')' ';' { pin = 2 }
 

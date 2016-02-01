@@ -13,6 +13,7 @@ public interface AvroIdlTypes {
   IElementType DECLARATION = new AvroIdlElementType("DECLARATION");
   IElementType DECLARATOR = new AvroIdlElementType("DECLARATOR");
   IElementType ENUM_DECL = new AvroIdlElementType("ENUM_DECL");
+  IElementType ENUM_VALUE = new AvroIdlElementType("ENUM_VALUE");
   IElementType FIXED_DECL = new AvroIdlElementType("FIXED_DECL");
   IElementType IMPORT_DECL = new AvroIdlElementType("IMPORT_DECL");
   IElementType IMPORT_TYPE = new AvroIdlElementType("IMPORT_TYPE");
@@ -89,6 +90,9 @@ public interface AvroIdlTypes {
       }
       else if (type == ENUM_DECL) {
         return new AvroIdlEnumDeclImpl(node);
+      }
+      else if (type == ENUM_VALUE) {
+        return new AvroIdlEnumValueImpl(node);
       }
       else if (type == FIXED_DECL) {
         return new AvroIdlFixedDeclImpl(node);

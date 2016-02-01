@@ -38,6 +38,9 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     else if (t == ENUM_DECL) {
       r = enum_decl(b, 0);
     }
+    else if (t == ENUM_VALUE) {
+      r = enum_value(b, 0);
+    }
     else if (t == FIXED_DECL) {
       r = fixed_decl(b, 0);
     }
@@ -321,25 +324,25 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // [ IDENTIFIER (',' IDENTIFIER)* ]
+  // [ enum_value (',' enum_value)* ]
   static boolean enum_contents(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_contents")) return false;
     enum_contents_0(b, l + 1);
     return true;
   }
 
-  // IDENTIFIER (',' IDENTIFIER)*
+  // enum_value (',' enum_value)*
   private static boolean enum_contents_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_contents_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, IDENTIFIER);
+    r = enum_value(b, l + 1);
     r = r && enum_contents_0_1(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // (',' IDENTIFIER)*
+  // (',' enum_value)*
   private static boolean enum_contents_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_contents_0_1")) return false;
     int c = current_position_(b);
@@ -351,13 +354,13 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // ',' IDENTIFIER
+  // ',' enum_value
   private static boolean enum_contents_0_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "enum_contents_0_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && consumeToken(b, IDENTIFIER);
+    r = r && enum_value(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -385,6 +388,18 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "enum_decl_0")) return false;
     annotation(b, l + 1);
     return true;
+  }
+
+  /* ********************************************************** */
+  // IDENTIFIER
+  public static boolean enum_value(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "enum_value")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, m, ENUM_VALUE, r);
+    return r;
   }
 
   /* ********************************************************** */

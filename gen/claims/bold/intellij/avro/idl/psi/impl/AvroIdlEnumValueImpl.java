@@ -11,39 +11,21 @@ import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlDeclaratorImpl extends ASTWrapperPsiElement implements AvroIdlDeclarator {
+public class AvroIdlEnumValueImpl extends ASTWrapperPsiElement implements AvroIdlEnumValue {
 
-  public AvroIdlDeclaratorImpl(ASTNode node) {
+  public AvroIdlEnumValueImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitDeclarator(this);
+    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitEnumValue(this);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
-  @Nullable
-  public AvroIdlJsonValue getJsonValue() {
-    return findChildByClass(AvroIdlJsonValue.class);
-  }
-
-  @Override
   @NotNull
-  public AvroIdlType getType() {
-    return findNotNullChildByClass(AvroIdlType.class);
-  }
-
-  @Override
-  @Nullable
   public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
+    return findNotNullChildByType(IDENTIFIER);
   }
 
   @Nullable

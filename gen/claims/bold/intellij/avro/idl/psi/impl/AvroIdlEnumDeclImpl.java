@@ -27,4 +27,31 @@ public class AvroIdlEnumDeclImpl extends AvroIdlDeclarationImpl implements AvroI
     return findChildByClass(AvroIdlAnnotation.class);
   }
 
+  @Override
+  @NotNull
+  public List<AvroIdlEnumValue> getEnumValueList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlEnumValue.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getIdentifier() {
+    return findChildByType(IDENTIFIER);
+  }
+
+  @Nullable
+  public PsiElement getNameIdentifier() {
+    return AvroIdlPsiUtil.getNameIdentifier(this);
+  }
+
+  @Nullable
+  @NonNls
+  public String getName() {
+    return AvroIdlPsiUtil.getName(this);
+  }
+
+  public PsiElement setName(String name) {
+    return AvroIdlPsiUtil.setName(this, name);
+  }
+
 }

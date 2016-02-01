@@ -6,18 +6,9 @@ import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
 
-public interface AvroIdlDeclarator extends PsiNameIdentifierOwner {
-
-  @Nullable
-  AvroIdlAnnotation getAnnotation();
-
-  @Nullable
-  AvroIdlJsonValue getJsonValue();
+public interface AvroIdlEnumValue extends PsiNameIdentifierOwner {
 
   @NotNull
-  AvroIdlType getType();
-
-  @Nullable
   PsiElement getIdentifier();
 
   @Nullable
