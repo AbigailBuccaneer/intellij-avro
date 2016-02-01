@@ -23,6 +23,7 @@ LINE_WS=[\ \t\f]
 WHITE_SPACE=({LINE_WS}|{EOL})+
 
 LINE_COMMENT="//".*
+DOC_COMMENT="/"\*\*([^*]|\*+[^/*])*\*+"/"
 BLOCK_COMMENT="/"\*([^*]|\*+[^/*])*\*+"/"
 IDENTIFIER=(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*
 STRING_LITERAL=\"([^\"]|\\\")*\"
@@ -71,6 +72,7 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
   "false"               { return FALSE; }
 
   {LINE_COMMENT}        { return LINE_COMMENT; }
+  {DOC_COMMENT}         { return DOC_COMMENT; }
   {BLOCK_COMMENT}       { return BLOCK_COMMENT; }
   {IDENTIFIER}          { return IDENTIFIER; }
   {STRING_LITERAL}      { return STRING_LITERAL; }

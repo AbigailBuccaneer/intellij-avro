@@ -24,7 +24,7 @@ public class AvroIdlParserDefinition implements ParserDefinition {
 
     public static final IFileElementType FILE = new IFileElementType(AvroIdlLanguage.INSTANCE);
 
-    public static final TokenSet COMMENTS = TokenSet.create(AvroIdlTypes.LINE_COMMENT, AvroIdlTypes.BLOCK_COMMENT);
+    public static final TokenSet COMMENTS = TokenSet.create(AvroIdlTypes.DOC_COMMENT, AvroIdlTypes.LINE_COMMENT, AvroIdlTypes.BLOCK_COMMENT);
     public static final TokenSet WHITE_SPACE = TokenSet.create(TokenType.WHITE_SPACE);
     public static final TokenSet STRING_LITERALS = TokenSet.create(AvroIdlTypes.STRING_LITERAL);
 

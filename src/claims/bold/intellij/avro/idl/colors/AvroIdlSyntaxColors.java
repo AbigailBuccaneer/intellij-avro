@@ -9,6 +9,7 @@ import com.intellij.openapi.options.colors.AttributesDescriptor;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public interface AvroIdlSyntaxColors {
+    TextAttributesKey DOC_COMMENT = createTextAttributesKey("AVROIDL_DOC_COMMENT", DefaultLanguageHighlighterColors.DOC_COMMENT);
     TextAttributesKey BLOCK_COMMENT = createTextAttributesKey("AVROIDL_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
     TextAttributesKey LINE_COMMENT = createTextAttributesKey("AVROIDL_LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
     TextAttributesKey BAD_CHAR = createTextAttributesKey("AVROIDL_BAD_CHAR", HighlighterColors.BAD_CHARACTER);
@@ -28,6 +29,7 @@ public interface AvroIdlSyntaxColors {
     TextAttributesKey TYPE = createTextAttributesKey("AVROIDL_TYPE", DefaultLanguageHighlighterColors.KEYWORD);
     TextAttributesKey ANNOTATION = createTextAttributesKey("AVROIDL_ANNOTATION", CodeInsightColors.ANNOTATION_NAME_ATTRIBUTES);
 
+    TextAttributesKey[] DOC_COMMENT_KEYS = new TextAttributesKey[] { DOC_COMMENT };
     TextAttributesKey[] BLOCK_COMMENT_KEYS = new TextAttributesKey[] { BLOCK_COMMENT };
     TextAttributesKey[] LINE_COMMENT_KEYS = new TextAttributesKey[] { LINE_COMMENT };
     TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[] { BAD_CHAR };
@@ -43,6 +45,7 @@ public interface AvroIdlSyntaxColors {
     TextAttributesKey[] TYPE_KEYS = new TextAttributesKey[] { TYPE };
 
     AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[] {
+        new AttributesDescriptor("Documentation comment", DOC_COMMENT),
         new AttributesDescriptor("Block comment", BLOCK_COMMENT),
         new AttributesDescriptor("Line comment", LINE_COMMENT),
         new AttributesDescriptor("Bad character", BAD_CHAR),

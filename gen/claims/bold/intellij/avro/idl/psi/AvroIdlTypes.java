@@ -37,6 +37,7 @@ public interface AvroIdlTypes {
   IElementType BYTES = new AvroIdlTokenType("bytes");
   IElementType COLON = new AvroIdlTokenType(":");
   IElementType COMMA = new AvroIdlTokenType(",");
+  IElementType DOC_COMMENT = new AvroIdlTokenType("DOC_COMMENT");
   IElementType DOUBLE = new AvroIdlTokenType("double");
   IElementType ENUM = new AvroIdlTokenType("enum");
   IElementType EQUALS = new AvroIdlTokenType("=");

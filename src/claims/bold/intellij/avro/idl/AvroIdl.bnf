@@ -52,6 +52,7 @@
         FALSE='false'
 
         LINE_COMMENT="regexp://.*"
+        DOC_COMMENT="regexp:/\*\*([^*]|\*+[^/*])*\*+/"
         BLOCK_COMMENT="regexp:/\*([^*]|\*+[^/*])*\*+/"
         IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*"
         STRING_LITERAL="regexp:\"([^\"]|\\\")*\""

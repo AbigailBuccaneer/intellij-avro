@@ -44,6 +44,7 @@ public class AvroIdlSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+        if (tokenType.equals(AvroIdlTypes.DOC_COMMENT)) return DOC_COMMENT_KEYS;
         if (tokenType.equals(AvroIdlTypes.BLOCK_COMMENT)) return BLOCK_COMMENT_KEYS;
         if (tokenType.equals(AvroIdlTypes.LINE_COMMENT)) return LINE_COMMENT_KEYS;
         if (tokenType.equals(TokenType.BAD_CHARACTER)) return BAD_CHAR_KEYS;
