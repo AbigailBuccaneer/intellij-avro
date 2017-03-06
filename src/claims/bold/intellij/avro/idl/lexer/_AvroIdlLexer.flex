@@ -1,6 +1,10 @@
 package claims.bold.intellij.avro.idl.lexer;
-import com.intellij.lexer.*;
+
+import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
+
+import static com.intellij.psi.TokenType.BAD_CHARACTER;
+import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 
 %%
@@ -18,21 +22,20 @@ import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 %type IElementType
 %unicode
 
-EOL="\r"|"\n"|"\r\n"
-LINE_WS=[\ \t\f]
-WHITE_SPACE=({LINE_WS}|{EOL})+
+EOL=\R
+WHITE_SPACE=\s+
 
 LINE_COMMENT="//".*
 DOC_COMMENT="/"\*\*([^*]|\*+[^/*])*\*+"/"
 BLOCK_COMMENT="/"\*([^*]|\*+[^/*])*\*+"/"
-IDENTIFIER=(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*
+IDENTIFIER=(`[^`]*`)|[:jletter:][[:jletterdigit:]\.-]*
 STRING_LITERAL=\"([^\"]|\\\")*\"
 INT_LITERAL=-?(0|[1-9][:digit:]*)
 FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}         { return com.intellij.psi.TokenType.WHITE_SPACE; }
+  {WHITE_SPACE}         { return WHITE_SPACE; }
 
   "{"                   { return LEFT_BRACE; }
   "}"                   { return RIGHT_BRACE; }
@@ -79,5 +82,6 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
   {INT_LITERAL}         { return INT_LITERAL; }
   {FLOAT_LITERAL}       { return FLOAT_LITERAL; }
 
-  [^] { return com.intellij.psi.TokenType.BAD_CHARACTER; }
 }
+
+[^] { return BAD_CHARACTER; }

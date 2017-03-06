@@ -54,7 +54,7 @@
         LINE_COMMENT="regexp://.*"
         DOC_COMMENT="regexp:/\*\*([^*]|\*+[^/*])*\*+/"
         BLOCK_COMMENT="regexp:/\*([^*]|\*+[^/*])*\*+/"
-        IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][[:jletterdigit:]\.]*"
+        IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][[:jletterdigit:]\.-]*"
         STRING_LITERAL="regexp:\"([^\"]|\\\")*\""
         INT_LITERAL="regexp:-?(0|[1-9][:digit:]*)"
         FLOAT_LITERAL="regexp:{INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?"
@@ -70,11 +70,12 @@
 
 file ::= protocol_def*
 
-protocol_def ::= annotation? 'protocol' IDENTIFIER '{' declaration* '}' { pin = 2 }
+protocol_def ::= annotation* 'protocol' IDENTIFIER '{' declaration* '}' { pin = 2 }
 
 annotation ::= '@' IDENTIFIER '(' annotation_body ')' { pin = 1 }
 private annotation_body ::= STRING_LITERAL | annotation_array
-private annotation_array ::= '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']' { pin = 1 }
+private annotation_array ::= '[' [annotation_array_member (',' annotation_array_member)*] ']' { pin = 1 }
+private annotation_array_member ::= STRING_LITERAL | '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']'
 
 declaration ::= import_decl | record_decl | enum_decl | fixed_decl | message_decl
 
