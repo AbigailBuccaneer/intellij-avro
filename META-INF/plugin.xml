@@ -34,7 +34,6 @@
         <lang.formatter language="AvroIDL" implementationClass="claims.bold.intellij.avro.idl.formatter.AvroIdlFormattingModelBuilder"/>
         <codeStyleSettingsProvider implementation="claims.bold.intellij.avro.idl.codestyle.AvroIdlCodeStyleSettingsProvider"/>
         <langCodeStyleSettingsProvider implementation="claims.bold.intellij.avro.idl.codestyle.AvroIdlLanguageCodeStyleSettingsProvider"/>
-
     </extensions>
 
     <application-components>
