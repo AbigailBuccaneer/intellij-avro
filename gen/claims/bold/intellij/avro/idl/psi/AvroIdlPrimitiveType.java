@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface AvroIdlPrimitiveType extends AvroIdlType {
 
   @Nullable
-  AvroIdlAnnotation getAnnotation();
-
-  @Nullable
   PsiElement getIdentifier();
 
 }

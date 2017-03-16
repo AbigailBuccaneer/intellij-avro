@@ -27,12 +27,6 @@ public class AvroIdlMapTypeImpl extends AvroIdlTypeImpl implements AvroIdlMapTyp
 
   @Override
   @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
-  @Nullable
   public AvroIdlType getType() {
     return findChildByClass(AvroIdlType.class);
   }

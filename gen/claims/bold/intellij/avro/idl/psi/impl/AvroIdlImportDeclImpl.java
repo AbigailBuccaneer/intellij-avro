@@ -26,9 +26,9 @@ public class AvroIdlImportDeclImpl extends AvroIdlDeclarationImpl implements Avr
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
+  @NotNull
+  public List<AvroIdlAnnotation> getAnnotationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlAnnotation.class);
   }
 
   @Override

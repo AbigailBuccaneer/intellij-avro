@@ -7,8 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface AvroIdlImportDecl extends AvroIdlDeclaration {
 
-  @Nullable
-  AvroIdlAnnotation getAnnotation();
+  @NotNull
+  List<AvroIdlAnnotation> getAnnotationList();
 
   @Nullable
   AvroIdlImportType getImportType();

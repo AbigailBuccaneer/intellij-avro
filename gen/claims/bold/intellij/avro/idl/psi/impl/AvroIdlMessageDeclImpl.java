@@ -26,12 +26,6 @@ public class AvroIdlMessageDeclImpl extends AvroIdlDeclarationImpl implements Av
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
   @NotNull
   public List<AvroIdlDeclarator> getDeclaratorList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlDeclarator.class);

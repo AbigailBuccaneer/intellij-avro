@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface AvroIdlUnionType extends AvroIdlType {
 
-  @Nullable
-  AvroIdlAnnotation getAnnotation();
-
   @NotNull
   List<AvroIdlType> getTypeList();
 

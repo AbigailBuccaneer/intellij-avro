@@ -8,8 +8,8 @@ import com.intellij.psi.PsiNameIdentifierOwner;
 
 public interface AvroIdlFixedDecl extends AvroIdlDeclaration, PsiNameIdentifierOwner {
 
-  @Nullable
-  AvroIdlAnnotation getAnnotation();
+  @NotNull
+  List<AvroIdlAnnotation> getAnnotationList();
 
   @Nullable
   PsiElement getIdentifier();

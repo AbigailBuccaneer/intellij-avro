@@ -27,12 +27,6 @@ public class AvroIdlPrimitiveTypeImpl extends AvroIdlTypeImpl implements AvroIdl
 
   @Override
   @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
-  @Nullable
   public PsiElement getIdentifier() {
     return findChildByType(IDENTIFIER);
   }

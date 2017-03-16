@@ -11,7 +11,7 @@ import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public abstract class AvroIdlTypeImpl extends ASTWrapperPsiElement implements AvroIdlType {
+public class AvroIdlTypeImpl extends ASTWrapperPsiElement implements AvroIdlType {
 
   public AvroIdlTypeImpl(ASTNode node) {
     super(node);
@@ -24,6 +24,18 @@ public abstract class AvroIdlTypeImpl extends ASTWrapperPsiElement implements Av
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof AvroIdlVisitor) accept((AvroIdlVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<AvroIdlAnnotation> getAnnotationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlAnnotation.class);
+  }
+
+  @Override
+  @NotNull
+  public AvroIdlType getType() {
+    return findNotNullChildByClass(AvroIdlType.class);
   }
 
 }

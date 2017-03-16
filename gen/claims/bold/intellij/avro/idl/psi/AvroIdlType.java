@@ -7,4 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface AvroIdlType extends PsiElement {
 
+  @NotNull
+  List<AvroIdlAnnotation> getAnnotationList();
+
+  @NotNull
+  AvroIdlType getType();
+
 }

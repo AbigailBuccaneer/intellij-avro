@@ -131,6 +131,9 @@ public interface AvroIdlTypes {
       else if (type == RECORD_TYPE) {
         return new AvroIdlRecordTypeImpl(node);
       }
+      else if (type == TYPE) {
+        return new AvroIdlTypeImpl(node);
+      }
       else if (type == UNION_TYPE) {
         return new AvroIdlUnionTypeImpl(node);
       }

@@ -26,12 +26,6 @@ public class AvroIdlUnionTypeImpl extends AvroIdlTypeImpl implements AvroIdlUnio
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
-  }
-
-  @Override
   @NotNull
   public List<AvroIdlType> getTypeList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlType.class);
