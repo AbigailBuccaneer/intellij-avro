@@ -99,9 +99,10 @@ private arguments ::= [ declarator (',' declarator)* ]
 declarator ::= type annotation* IDENTIFIER [ '=' json_value ] { pin = 1 }
 
 type ::= annotation* (array_type | map_type | union_type | primitive_type | IDENTIFIER)
-primitive_type ::= 'boolean' | 'bytes' | 'int' | 'string' | 'float' | 'double' | 'long' | 'null'| 'date' | 'time_ms' | 'timestamp_ms' | 'decimal' | 'void'
+primitive_type ::= 'boolean' | 'bytes' | 'int' | 'string' | 'float' | 'double' | 'long' | 'null'| 'date' | 'time_ms' | 'timestamp_ms' | decimal_type | 'void'
 private angle_type ::= '<' type '>' { pin = 1 }
 array_type ::= 'array' angle_type { pin = 1 }
+decimal_type ::= 'decimal' '(' INT_LITERAL ',' INT_LITERAL ')' { pin = 1 }
 map_type ::= 'map' angle_type { pin = 1 }
 union_type ::= 'union' '{' union_contents '}' { pin = 1 }
 private union_contents ::= [ type (',' type)* ]

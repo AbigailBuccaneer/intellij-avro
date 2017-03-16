@@ -16,6 +16,10 @@ public class AvroIdlVisitor extends PsiElementVisitor {
     visitType(o);
   }
 
+  public void visitDecimalType(@NotNull AvroIdlDecimalType o) {
+    visitType(o);
+  }
+
   public void visitDeclaration(@NotNull AvroIdlDeclaration o) {
     visitPsiElement(o);
   }

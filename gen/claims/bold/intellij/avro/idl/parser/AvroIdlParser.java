@@ -29,6 +29,9 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     else if (t == ARRAY_TYPE) {
       r = array_type(b, 0);
     }
+    else if (t == DECIMAL_TYPE) {
+      r = decimal_type(b, 0);
+    }
     else if (t == DECLARATION) {
       r = declaration(b, 0);
     }
@@ -99,8 +102,8 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
     create_token_set_(DECLARATION, ENUM_DECL, FIXED_DECL, IMPORT_DECL,
       MESSAGE_DECL, RECORD_DECL),
-    create_token_set_(ARRAY_TYPE, IMPORT_TYPE, MAP_TYPE, PRIMITIVE_TYPE,
-      RECORD_TYPE, TYPE, UNION_TYPE),
+    create_token_set_(ARRAY_TYPE, DECIMAL_TYPE, IMPORT_TYPE, MAP_TYPE,
+      PRIMITIVE_TYPE, RECORD_TYPE, TYPE, UNION_TYPE),
   };
 
   /* ********************************************************** */
@@ -185,6 +188,19 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, ARRAY);
     p = r; // pin = 1
     r = r && angle_type(b, l + 1);
+    exit_section_(b, l, m, r, p, null);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'decimal' '(' INT_LITERAL ',' INT_LITERAL ')'
+  public static boolean decimal_type(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "decimal_type")) return false;
+    if (!nextTokenIs(b, DECIMAL)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, DECIMAL_TYPE, null);
+    r = consumeTokens(b, 1, DECIMAL, LEFT_PAREN, INT_LITERAL, COMMA, INT_LITERAL, RIGHT_PAREN);
+    p = r; // pin = 1
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -609,11 +625,11 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'boolean' | 'bytes' | 'int' | 'string' | 'float' | 'double' | 'long' | 'null'| 'date' | 'time_ms' | 'timestamp_ms' | 'decimal' | 'void'
+  // 'boolean' | 'bytes' | 'int' | 'string' | 'float' | 'double' | 'long' | 'null'| 'date' | 'time_ms' | 'timestamp_ms' | decimal_type | 'void'
   public static boolean primitive_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primitive_type")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, PRIMITIVE_TYPE, "<primitive type>");
+    Marker m = enter_section_(b, l, _COLLAPSE_, PRIMITIVE_TYPE, "<primitive type>");
     r = consumeToken(b, BOOLEAN);
     if (!r) r = consumeToken(b, BYTES);
     if (!r) r = consumeToken(b, INT);
@@ -625,7 +641,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, DATE);
     if (!r) r = consumeToken(b, TIME);
     if (!r) r = consumeToken(b, TIMESTAMP);
-    if (!r) r = consumeToken(b, DECIMAL);
+    if (!r) r = decimal_type(b, l + 1);
     if (!r) r = consumeToken(b, VOID);
     exit_section_(b, l, m, r, false, null);
     return r;

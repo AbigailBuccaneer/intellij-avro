@@ -10,6 +10,7 @@ public interface AvroIdlTypes {
 
   IElementType ANNOTATION = new AvroIdlElementType("ANNOTATION");
   IElementType ARRAY_TYPE = new AvroIdlElementType("ARRAY_TYPE");
+  IElementType DECIMAL_TYPE = new AvroIdlElementType("DECIMAL_TYPE");
   IElementType DECLARATION = new AvroIdlElementType("DECLARATION");
   IElementType DECLARATOR = new AvroIdlElementType("DECLARATOR");
   IElementType ENUM_DECL = new AvroIdlElementType("ENUM_DECL");
@@ -87,6 +88,9 @@ public interface AvroIdlTypes {
       }
       else if (type == ARRAY_TYPE) {
         return new AvroIdlArrayTypeImpl(node);
+      }
+      else if (type == DECIMAL_TYPE) {
+        return new AvroIdlDecimalTypeImpl(node);
       }
       else if (type == DECLARATOR) {
         return new AvroIdlDeclaratorImpl(node);
