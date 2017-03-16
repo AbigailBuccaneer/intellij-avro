@@ -13,6 +13,14 @@
     tokenTypeClass = "claims.bold.intellij.avro.idl.psi.AvroIdlTokenType"
 
     tokens=[
+        INT_LITERAL="regexp:-?(0|[1-9][:digit:]*)"
+        FLOAT_LITERAL="regexp:-?(NaN|Infinity|({DECIMAL_FLOATING_POINT_LITERAL}))"
+        DECIMAL_FLOATING_POINT_LITERAL="regexp:{INT_LITERAL}(\.[:digit:]+)?([eE][+-]?[:digit:]+)?"
+        STRING_LITERAL="regexp:\"([^\"]|\\\")*\""
+        LINE_COMMENT="regexp://.*"
+        DOC_COMMENT="regexp:/\*\*([^*]|\*+[^/*])*\*+/"
+        BLOCK_COMMENT="regexp:/\*([^*]|\*+[^/*])*\*+/"
+
         LEFT_BRACE='{'
         RIGHT_BRACE='}'
         LEFT_PAREN='('
@@ -56,13 +64,7 @@
         TIMESTAMP='timestamp_ms'
         DECIMAL='decimal'
 
-        LINE_COMMENT="regexp://.*"
-        DOC_COMMENT="regexp:/\*\*([^*]|\*+[^/*])*\*+/"
-        BLOCK_COMMENT="regexp:/\*([^*]|\*+[^/*])*\*+/"
         IDENTIFIER="regexp:(`[^`]*`)|[:jletter:][[:jletterdigit:]\.-]*"
-        STRING_LITERAL="regexp:\"([^\"]|\\\")*\""
-        INT_LITERAL="regexp:-?(0|[1-9][:digit:]*)"
-        FLOAT_LITERAL="regexp:{INT_LITERAL}(\.[:digit:]+)?([eE][+-]?[:digit:]+)?"
     ]
 
     generateTokens=true

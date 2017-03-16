@@ -40,6 +40,7 @@ public interface AvroIdlTypes {
   IElementType COMMA = new AvroIdlTokenType(",");
   IElementType DATE = new AvroIdlTokenType("date");
   IElementType DECIMAL = new AvroIdlTokenType("decimal");
+  IElementType DECIMAL_FLOATING_POINT_LITERAL = new AvroIdlTokenType("DECIMAL_FLOATING_POINT_LITERAL");
   IElementType DOC_COMMENT = new AvroIdlTokenType("DOC_COMMENT");
   IElementType DOUBLE = new AvroIdlTokenType("double");
   IElementType ENUM = new AvroIdlTokenType("enum");
