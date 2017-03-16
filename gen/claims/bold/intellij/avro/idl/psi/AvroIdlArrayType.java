@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface AvroIdlArrayType extends AvroIdlType {
 
-  @Nullable
-  AvroIdlType getType();
-
 }

@@ -10,7 +10,10 @@ public interface AvroIdlType extends PsiElement {
   @NotNull
   List<AvroIdlAnnotation> getAnnotationList();
 
-  @NotNull
+  @Nullable
   AvroIdlType getType();
+
+  @Nullable
+  PsiElement getIdentifier();
 
 }

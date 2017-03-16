@@ -33,9 +33,15 @@ public class AvroIdlTypeImpl extends ASTWrapperPsiElement implements AvroIdlType
   }
 
   @Override
-  @NotNull
+  @Nullable
   public AvroIdlType getType() {
-    return findNotNullChildByClass(AvroIdlType.class);
+    return findChildByClass(AvroIdlType.class);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getIdentifier() {
+    return findChildByType(IDENTIFIER);
   }
 
 }

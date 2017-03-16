@@ -25,10 +25,4 @@ public class AvroIdlPrimitiveTypeImpl extends AvroIdlTypeImpl implements AvroIdl
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
-  }
-
 }

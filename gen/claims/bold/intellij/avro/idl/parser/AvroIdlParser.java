@@ -609,20 +609,24 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'int' | 'long' | 'string' | 'boolean' | 'float' | 'double' | 'null' | 'bytes' | IDENTIFIER
+  // 'boolean' | 'bytes' | 'int' | 'string' | 'float' | 'double' | 'long' | 'null'| 'date' | 'time_ms' | 'timestamp_ms' | 'decimal' | 'void'
   public static boolean primitive_type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "primitive_type")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PRIMITIVE_TYPE, "<primitive type>");
-    r = consumeToken(b, INT);
-    if (!r) r = consumeToken(b, LONG);
+    r = consumeToken(b, BOOLEAN);
+    if (!r) r = consumeToken(b, BYTES);
+    if (!r) r = consumeToken(b, INT);
     if (!r) r = consumeToken(b, STRING);
-    if (!r) r = consumeToken(b, BOOLEAN);
     if (!r) r = consumeToken(b, FLOAT);
     if (!r) r = consumeToken(b, DOUBLE);
+    if (!r) r = consumeToken(b, LONG);
     if (!r) r = consumeToken(b, NULL);
-    if (!r) r = consumeToken(b, BYTES);
-    if (!r) r = consumeToken(b, IDENTIFIER);
+    if (!r) r = consumeToken(b, DATE);
+    if (!r) r = consumeToken(b, TIME);
+    if (!r) r = consumeToken(b, TIMESTAMP);
+    if (!r) r = consumeToken(b, DECIMAL);
+    if (!r) r = consumeToken(b, VOID);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -732,7 +736,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // annotation* (array_type | map_type | union_type | primitive_type)
+  // annotation* (array_type | map_type | union_type | primitive_type | IDENTIFIER)
   public static boolean type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type")) return false;
     boolean r;
@@ -755,7 +759,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // array_type | map_type | union_type | primitive_type
+  // array_type | map_type | union_type | primitive_type | IDENTIFIER
   private static boolean type_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type_1")) return false;
     boolean r;
@@ -764,6 +768,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     if (!r) r = map_type(b, l + 1);
     if (!r) r = union_type(b, l + 1);
     if (!r) r = primitive_type(b, l + 1);
+    if (!r) r = consumeToken(b, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }

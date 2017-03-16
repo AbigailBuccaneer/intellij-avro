@@ -27,29 +27,34 @@
         COLON=':'
         EQUALS='='
 
-        PROTOCOL='protocol'
-        IMPORT='import'
-        IDL='idl'
-        SCHEMA='schema'
-        RECORD='record'
-        ERROR='error'
+        ARRAY='array'
+        BOOLEAN='boolean'
+        DOUBLE='double'
         ENUM='enum'
+        ERROR='error'
+        FALSE='false'
         FIXED='fixed'
-        THROWS='throws'
-        ONEWAY='oneway'
+        FLOAT='float'
+        IDL='idl'
+        IMPORT='import'
         INT='int'
         LONG='long'
-        STRING='string'
-        BOOLEAN='boolean'
-        FLOAT='float'
-        DOUBLE='double'
-        NULL='null'
-        BYTES='bytes'
-        ARRAY='array'
         MAP='map'
-        UNION='union'
+        ONEWAY='oneway'
+        BYTES='bytes'
+        SCHEMA='schema'
+        STRING='string'
+        NULL='null'
+        PROTOCOL='protocol'
+        RECORD='record'
+        THROWS='throws'
         TRUE='true'
-        FALSE='false'
+        UNION='union'
+        VOID='void'
+        DATE='date'
+        TIME='time_ms'
+        TIMESTAMP='timestamp_ms'
+        DECIMAL='decimal'
 
         LINE_COMMENT="regexp://.*"
         DOC_COMMENT="regexp:/\*\*([^*]|\*+[^/*])*\*+/"
@@ -93,8 +98,8 @@ private arguments ::= [ declarator (',' declarator)* ]
 
 declarator ::= type annotation* IDENTIFIER [ '=' json_value ] { pin = 1 }
 
-type ::= annotation* (array_type | map_type | union_type | primitive_type)
-primitive_type ::= 'int' | 'long' | 'string' | 'boolean' | 'float' | 'double' | 'null' | 'bytes' | IDENTIFIER
+type ::= annotation* (array_type | map_type | union_type | primitive_type | IDENTIFIER)
+primitive_type ::= 'boolean' | 'bytes' | 'int' | 'string' | 'float' | 'double' | 'long' | 'null'| 'date' | 'time_ms' | 'timestamp_ms' | 'decimal' | 'void'
 private angle_type ::= '<' type '>' { pin = 1 }
 array_type ::= 'array' angle_type { pin = 1 }
 map_type ::= 'map' angle_type { pin = 1 }

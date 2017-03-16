@@ -37,6 +37,8 @@ public interface AvroIdlTypes {
   IElementType BYTES = new AvroIdlTokenType("bytes");
   IElementType COLON = new AvroIdlTokenType(":");
   IElementType COMMA = new AvroIdlTokenType(",");
+  IElementType DATE = new AvroIdlTokenType("date");
+  IElementType DECIMAL = new AvroIdlTokenType("decimal");
   IElementType DOC_COMMENT = new AvroIdlTokenType("DOC_COMMENT");
   IElementType DOUBLE = new AvroIdlTokenType("double");
   IElementType ENUM = new AvroIdlTokenType("enum");
@@ -71,8 +73,11 @@ public interface AvroIdlTypes {
   IElementType STRING = new AvroIdlTokenType("string");
   IElementType STRING_LITERAL = new AvroIdlTokenType("STRING_LITERAL");
   IElementType THROWS = new AvroIdlTokenType("throws");
+  IElementType TIME = new AvroIdlTokenType("time_ms");
+  IElementType TIMESTAMP = new AvroIdlTokenType("timestamp_ms");
   IElementType TRUE = new AvroIdlTokenType("true");
   IElementType UNION = new AvroIdlTokenType("union");
+  IElementType VOID = new AvroIdlTokenType("void");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {

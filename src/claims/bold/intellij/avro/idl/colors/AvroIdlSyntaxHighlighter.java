@@ -1,12 +1,15 @@
 package claims.bold.intellij.avro.idl.colors;
 
 import claims.bold.intellij.avro.idl.lexer.AvroIdlLexer;
+import claims.bold.intellij.avro.idl.psi.AvroIdlElementType;
 import claims.bold.intellij.avro.idl.psi.AvroIdlTypes;
+
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -26,9 +29,10 @@ public class AvroIdlSyntaxHighlighter extends SyntaxHighlighterBase {
     }
 
     private static final Set<IElementType> TYPE_TOKENS = set(
-        AvroIdlTypes.INT, AvroIdlTypes.LONG, AvroIdlTypes.STRING, AvroIdlTypes.BOOLEAN, AvroIdlTypes.FLOAT,
-        AvroIdlTypes.DOUBLE, AvroIdlTypes.NULL, AvroIdlTypes.BYTES, AvroIdlTypes.ARRAY, AvroIdlTypes.MAP,
-        AvroIdlTypes.UNION);
+            AvroIdlTypes.BOOLEAN, AvroIdlTypes.BYTES, AvroIdlTypes.INT, AvroIdlTypes.STRING, AvroIdlTypes.FLOAT,
+            AvroIdlTypes.DOUBLE, AvroIdlTypes.LONG, AvroIdlTypes.NULL, AvroIdlTypes.VOID, AvroIdlTypes.DATE,
+            AvroIdlTypes.TIME, AvroIdlTypes.TIMESTAMP, AvroIdlTypes.DECIMAL, AvroIdlTypes.VOID, AvroIdlTypes.ARRAY,
+            AvroIdlTypes.MAP, AvroIdlTypes.UNION);
 
     private static final Set<IElementType> KEYWORD_TOKENS = set(
         AvroIdlTypes.PROTOCOL, AvroIdlTypes.IMPORT, AvroIdlTypes.IDL, AvroIdlTypes.SCHEMA, AvroIdlTypes.RECORD,

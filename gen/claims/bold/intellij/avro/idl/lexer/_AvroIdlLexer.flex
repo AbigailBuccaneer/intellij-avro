@@ -50,29 +50,34 @@ FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-]?[:digit:]+)?
   ";"                   { return SEMICOLON; }
   ":"                   { return COLON; }
   "="                   { return EQUALS; }
-  "protocol"            { return PROTOCOL; }
-  "import"              { return IMPORT; }
-  "idl"                 { return IDL; }
-  "schema"              { return SCHEMA; }
-  "record"              { return RECORD; }
-  "error"               { return ERROR; }
+  "array"               { return ARRAY; }
+  "boolean"             { return BOOLEAN; }
+  "double"              { return DOUBLE; }
   "enum"                { return ENUM; }
+  "error"               { return ERROR; }
+  "false"               { return FALSE; }
   "fixed"               { return FIXED; }
-  "throws"              { return THROWS; }
-  "oneway"              { return ONEWAY; }
+  "float"               { return FLOAT; }
+  "idl"                 { return IDL; }
+  "import"              { return IMPORT; }
   "int"                 { return INT; }
   "long"                { return LONG; }
-  "string"              { return STRING; }
-  "boolean"             { return BOOLEAN; }
-  "float"               { return FLOAT; }
-  "double"              { return DOUBLE; }
-  "null"                { return NULL; }
-  "bytes"               { return BYTES; }
-  "array"               { return ARRAY; }
   "map"                 { return MAP; }
-  "union"               { return UNION; }
+  "oneway"              { return ONEWAY; }
+  "bytes"               { return BYTES; }
+  "schema"              { return SCHEMA; }
+  "string"              { return STRING; }
+  "null"                { return NULL; }
+  "protocol"            { return PROTOCOL; }
+  "record"              { return RECORD; }
+  "throws"              { return THROWS; }
   "true"                { return TRUE; }
-  "false"               { return FALSE; }
+  "union"               { return UNION; }
+  "void"                { return VOID; }
+  "date"                { return DATE; }
+  "time_ms"             { return TIME; }
+  "timestamp_ms"        { return TIMESTAMP; }
+  "decimal"             { return DECIMAL; }
 
   {LINE_COMMENT}        { return LINE_COMMENT; }
   {DOC_COMMENT}         { return DOC_COMMENT; }

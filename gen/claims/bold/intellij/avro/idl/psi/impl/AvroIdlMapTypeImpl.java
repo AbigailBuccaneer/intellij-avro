@@ -25,10 +25,4 @@ public class AvroIdlMapTypeImpl extends AvroIdlTypeImpl implements AvroIdlMapTyp
     else super.accept(visitor);
   }
 
-  @Override
-  @Nullable
-  public AvroIdlType getType() {
-    return findChildByClass(AvroIdlType.class);
-  }
-
 }
