@@ -17,15 +17,19 @@ public class AvroIdlProtocolDefImpl extends ASTWrapperPsiElement implements Avro
     super(node);
   }
 
+  public void accept(@NotNull AvroIdlVisitor visitor) {
+    visitor.visitProtocolDef(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitProtocolDef(this);
+    if (visitor instanceof AvroIdlVisitor) accept((AvroIdlVisitor)visitor);
     else super.accept(visitor);
   }
 
   @Override
-  @Nullable
-  public AvroIdlAnnotation getAnnotation() {
-    return findChildByClass(AvroIdlAnnotation.class);
+  @NotNull
+  public List<AvroIdlAnnotation> getAnnotationList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, AvroIdlAnnotation.class);
   }
 
   @Override

@@ -17,8 +17,12 @@ public class AvroIdlJsonObjectImpl extends ASTWrapperPsiElement implements AvroI
     super(node);
   }
 
+  public void accept(@NotNull AvroIdlVisitor visitor) {
+    visitor.visitJsonObject(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitJsonObject(this);
+    if (visitor instanceof AvroIdlVisitor) accept((AvroIdlVisitor)visitor);
     else super.accept(visitor);
   }
 

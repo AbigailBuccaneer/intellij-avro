@@ -16,8 +16,12 @@ public class AvroIdlImportDeclImpl extends AvroIdlDeclarationImpl implements Avr
     super(node);
   }
 
+  public void accept(@NotNull AvroIdlVisitor visitor) {
+    visitor.visitImportDecl(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitImportDecl(this);
+    if (visitor instanceof AvroIdlVisitor) accept((AvroIdlVisitor)visitor);
     else super.accept(visitor);
   }
 

@@ -83,9 +83,6 @@ public interface AvroIdlTypes {
       else if (type == ARRAY_TYPE) {
         return new AvroIdlArrayTypeImpl(node);
       }
-      else if (type == DECLARATION) {
-        return new AvroIdlDeclarationImpl(node);
-      }
       else if (type == DECLARATOR) {
         return new AvroIdlDeclaratorImpl(node);
       }
@@ -133,9 +130,6 @@ public interface AvroIdlTypes {
       }
       else if (type == RECORD_TYPE) {
         return new AvroIdlRecordTypeImpl(node);
-      }
-      else if (type == TYPE) {
-        return new AvroIdlTypeImpl(node);
       }
       else if (type == UNION_TYPE) {
         return new AvroIdlUnionTypeImpl(node);

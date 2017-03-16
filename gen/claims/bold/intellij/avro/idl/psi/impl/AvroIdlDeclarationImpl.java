@@ -11,14 +11,18 @@ import static claims.bold.intellij.avro.idl.psi.AvroIdlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import claims.bold.intellij.avro.idl.psi.*;
 
-public class AvroIdlDeclarationImpl extends ASTWrapperPsiElement implements AvroIdlDeclaration {
+public abstract class AvroIdlDeclarationImpl extends ASTWrapperPsiElement implements AvroIdlDeclaration {
 
   public AvroIdlDeclarationImpl(ASTNode node) {
     super(node);
   }
 
+  public void accept(@NotNull AvroIdlVisitor visitor) {
+    visitor.visitDeclaration(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof AvroIdlVisitor) ((AvroIdlVisitor)visitor).visitDeclaration(this);
+    if (visitor instanceof AvroIdlVisitor) accept((AvroIdlVisitor)visitor);
     else super.accept(visitor);
   }
 

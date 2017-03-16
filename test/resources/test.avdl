@@ -1,0 +1,17 @@
+@namespace("mynamespace")
+protocol MyProtocol {
+
+    @register(["some", "values"])
+    record Employee {
+        string name;
+        boolean active = true;
+        long salary;
+    }
+
+    @register([["some", "other", "values"], ["even", "more", "values"]])
+    record Customer {
+        string name;
+        boolean active = true;
+    }
+
+}
