@@ -31,7 +31,7 @@ BLOCK_COMMENT="/"\*([^*]|\*+[^/*])*\*+"/"
 IDENTIFIER=(`[^`]*`)|[:jletter:][[:jletterdigit:]\.-]*
 STRING_LITERAL=\"([^\"]|\\\")*\"
 INT_LITERAL=-?(0|[1-9][:digit:]*)
-FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-][:digit:]+)?
+FLOAT_LITERAL={INT_LITERAL}(\.[:digit:]+)?([eE][+-]?[:digit:]+)?
 
 %%
 <YYINITIAL> {
