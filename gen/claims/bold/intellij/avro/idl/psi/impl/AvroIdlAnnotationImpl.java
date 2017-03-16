@@ -28,6 +28,12 @@ public class AvroIdlAnnotationImpl extends ASTWrapperPsiElement implements AvroI
 
   @Override
   @Nullable
+  public AvroIdlJsonValue getJsonValue() {
+    return findChildByClass(AvroIdlJsonValue.class);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getIdentifier() {
     return findChildByType(IDENTIFIER);
   }

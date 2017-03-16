@@ -72,10 +72,7 @@ file ::= protocol_def*
 
 protocol_def ::= annotation* 'protocol' IDENTIFIER '{' declaration* '}' { pin = 2 }
 
-annotation ::= '@' IDENTIFIER '(' annotation_body ')' { pin = 1 }
-private annotation_body ::= STRING_LITERAL | annotation_array
-private annotation_array ::= '[' [annotation_array_member (',' annotation_array_member)*] ']' { pin = 1 }
-private annotation_array_member ::= STRING_LITERAL | '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']'
+annotation ::= '@' IDENTIFIER '(' json_value ')' { pin = 1 }
 
 declaration ::= import_decl | record_decl | enum_decl | fixed_decl | message_decl
 

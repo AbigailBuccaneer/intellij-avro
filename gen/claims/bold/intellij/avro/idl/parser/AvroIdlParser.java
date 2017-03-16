@@ -119,7 +119,7 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '@' IDENTIFIER '(' annotation_body ')'
+  // '@' IDENTIFIER '(' json_value ')'
   public static boolean annotation(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "annotation")) return false;
     if (!nextTokenIs(b, AT)) return false;
@@ -127,144 +127,10 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NONE_, ANNOTATION, null);
     r = consumeTokens(b, 1, AT, IDENTIFIER, LEFT_PAREN);
     p = r; // pin = 1
-    r = r && report_error_(b, annotation_body(b, l + 1));
+    r = r && report_error_(b, json_value(b, l + 1));
     r = p && consumeToken(b, RIGHT_PAREN) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
-  }
-
-  /* ********************************************************** */
-  // '[' [annotation_array_member (',' annotation_array_member)*] ']'
-  static boolean annotation_array(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array")) return false;
-    if (!nextTokenIs(b, LEFT_BRACKET)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_);
-    r = consumeToken(b, LEFT_BRACKET);
-    p = r; // pin = 1
-    r = r && report_error_(b, annotation_array_1(b, l + 1));
-    r = p && consumeToken(b, RIGHT_BRACKET) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
-  }
-
-  // [annotation_array_member (',' annotation_array_member)*]
-  private static boolean annotation_array_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_1")) return false;
-    annotation_array_1_0(b, l + 1);
-    return true;
-  }
-
-  // annotation_array_member (',' annotation_array_member)*
-  private static boolean annotation_array_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = annotation_array_member(b, l + 1);
-    r = r && annotation_array_1_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (',' annotation_array_member)*
-  private static boolean annotation_array_1_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_1_0_1")) return false;
-    int c = current_position_(b);
-    while (true) {
-      if (!annotation_array_1_0_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "annotation_array_1_0_1", c)) break;
-      c = current_position_(b);
-    }
-    return true;
-  }
-
-  // ',' annotation_array_member
-  private static boolean annotation_array_1_0_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_1_0_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, COMMA);
-    r = r && annotation_array_member(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // STRING_LITERAL | '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']'
-  static boolean annotation_array_member(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_member")) return false;
-    if (!nextTokenIs(b, "", LEFT_BRACKET, STRING_LITERAL)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, STRING_LITERAL);
-    if (!r) r = annotation_array_member_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // '[' [STRING_LITERAL (',' STRING_LITERAL)*] ']'
-  private static boolean annotation_array_member_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_member_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, LEFT_BRACKET);
-    r = r && annotation_array_member_1_1(b, l + 1);
-    r = r && consumeToken(b, RIGHT_BRACKET);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // [STRING_LITERAL (',' STRING_LITERAL)*]
-  private static boolean annotation_array_member_1_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_member_1_1")) return false;
-    annotation_array_member_1_1_0(b, l + 1);
-    return true;
-  }
-
-  // STRING_LITERAL (',' STRING_LITERAL)*
-  private static boolean annotation_array_member_1_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_member_1_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, STRING_LITERAL);
-    r = r && annotation_array_member_1_1_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (',' STRING_LITERAL)*
-  private static boolean annotation_array_member_1_1_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_member_1_1_0_1")) return false;
-    int c = current_position_(b);
-    while (true) {
-      if (!annotation_array_member_1_1_0_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "annotation_array_member_1_1_0_1", c)) break;
-      c = current_position_(b);
-    }
-    return true;
-  }
-
-  // ',' STRING_LITERAL
-  private static boolean annotation_array_member_1_1_0_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_array_member_1_1_0_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, COMMA, STRING_LITERAL);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // STRING_LITERAL | annotation_array
-  static boolean annotation_body(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "annotation_body")) return false;
-    if (!nextTokenIs(b, "", LEFT_BRACKET, STRING_LITERAL)) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, STRING_LITERAL);
-    if (!r) r = annotation_array(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
   }
 
   /* ********************************************************** */
