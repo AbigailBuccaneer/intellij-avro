@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>claims.bold.intellij.avro</id>
     <name>Apache Avro™ support</name>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <vendor email="abigail@bold.claims" url="https://github.com/AbigailBuccaneer/intellij-avro">Abigail</vendor>
 
     <description><![CDATA[

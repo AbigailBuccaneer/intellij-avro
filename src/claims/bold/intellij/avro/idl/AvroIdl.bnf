@@ -95,7 +95,7 @@ enum_value ::= IDENTIFIER
 fixed_decl ::= annotation* 'fixed' IDENTIFIER '(' INT_LITERAL ')' ';' { pin = 2 }
 
 message_decl ::= type IDENTIFIER '(' arguments ')' message_attributes* ';' { pin = 3 }
-private message_attributes ::= 'throws' IDENTIFIER | 'oneway' { pin = 1}
+private message_attributes ::= ( 'throws' IDENTIFIER (',' IDENTIFIER)* ) | 'oneway' { pin = 1}
 private arguments ::= [ declarator (',' declarator)* ]
 
 declarator ::= type annotation* IDENTIFIER [ '=' json_value ] { pin = 1 }
