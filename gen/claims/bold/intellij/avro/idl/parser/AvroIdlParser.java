@@ -583,14 +583,47 @@ public class AvroIdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'throws' IDENTIFIER | 'oneway'
+  // ( 'throws' IDENTIFIER (',' IDENTIFIER)* ) | 'oneway'
   static boolean message_attributes(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "message_attributes")) return false;
     if (!nextTokenIs(b, "", ONEWAY, THROWS)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = parseTokens(b, 0, THROWS, IDENTIFIER);
+    r = message_attributes_0(b, l + 1);
     if (!r) r = consumeToken(b, ONEWAY);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // 'throws' IDENTIFIER (',' IDENTIFIER)*
+  private static boolean message_attributes_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "message_attributes_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, THROWS, IDENTIFIER);
+    r = r && message_attributes_0_2(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' IDENTIFIER)*
+  private static boolean message_attributes_0_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "message_attributes_0_2")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!message_attributes_0_2_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "message_attributes_0_2", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // ',' IDENTIFIER
+  private static boolean message_attributes_0_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "message_attributes_0_2_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, COMMA, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }

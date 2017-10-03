@@ -31,10 +31,15 @@ protocol Simple {
         string message;
     }
 
+    error DummyError {
+        string message;
+    }
+
     string hello(string greeting);
     TestRecord echo(TestRecord `record`);
     int add(int arg1, int arg2);
     bytes echoBytes(bytes data);
     void `error`() throws TestError;
+    void multipleErrors() throws TestError, DummyError;
     void ping() oneway;
 }
