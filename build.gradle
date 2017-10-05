@@ -6,6 +6,7 @@ plugins {
 
 intellij {
     pluginName 'intellij-avro'
+    updateSinceUntilBuild = false
 }
 
 sourceSets.main.java.srcDir(new File("src/gen/"))
