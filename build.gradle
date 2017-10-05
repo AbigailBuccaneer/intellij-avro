@@ -6,6 +6,7 @@ plugins {
 
 intellij {
     pluginName 'intellij-avro'
+    version 'IC-15.0'
     updateSinceUntilBuild = false
 }
 

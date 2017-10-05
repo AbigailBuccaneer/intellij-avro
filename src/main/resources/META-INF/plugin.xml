@@ -18,7 +18,7 @@
     </ul>
     ]]></change-notes>
 
-    <idea-version since-build="131"/>
+    <idea-version since-build="143"/>
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
