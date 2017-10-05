@@ -1,0 +1,14 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.2.17'
+}
+
+intellij {
+    pluginName 'intellij-avro'
+}
+
+sourceSets.main.java.srcDir(new File("src/gen/"))
+
+group 'claims.bold.intellij'
+version '0.3.1'

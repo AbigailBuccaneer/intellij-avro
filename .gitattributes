@@ -1,2 +1,5 @@
 * text=auto
 gen -diff
+gradle/ -diff
+gradlew -diff
+gradlew.bat -diff
