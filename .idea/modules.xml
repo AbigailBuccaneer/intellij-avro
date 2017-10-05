@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/intellij-avro.iml" filepath="$PROJECT_DIR$/.idea/intellij-avro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intellij-avro.iml" filepath="$PROJECT_DIR$/intellij-avro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-avro_main.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-avro_main.iml" group="intellij-avro" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/intellij-avro_test.iml" filepath="$PROJECT_DIR$/.idea/modules/intellij-avro_test.iml" group="intellij-avro" />
     </modules>
   </component>
 </project>
